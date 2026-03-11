@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LCA — Internal Tools</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F5F4F0;
+      --bg-card: #FFFFFF;
+      --fg: #111110;
+      --fg-muted: #6B6A65;
+      --fg-subtle: #9B9A95;
+      --accent: #111110;
+      --border: #E4E3DF;
+      --border-hover: #C8C7C2;
+      --tag-bg: #EEEDEA;
+      --tag-fg: #6B6A65;
+      --link: #111110;
+      --radius: 12px;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 24px 80px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--fg);
+    }
+
+    .nav-logo-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .nav-wordmark {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    .nav-section {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--fg-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 0 56px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      max-width: 460px;
+    }
+
+    /* ── GRID ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.2s forwards;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+      cursor: pointer;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.25s; }
+    .card:nth-child(2) { animation-delay: 0.32s; }
+    .card:nth-child(3) { animation-delay: 0.39s; }
+    .card:nth-child(4) { animation-delay: 0.46s; }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--tag-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--fg-muted);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tag-fg);
+      background: var(--tag-bg);
+      padding: 4px 9px;
+      border-radius: 100px;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+
+    .card-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .card:hover .card-arrow {
+      transform: translate(1px, -1px);
+    }
+
+    .card-arrow svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--bg);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.6s forwards;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+    }
+
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+    }
+
+    /* ── MAX WIDTH ── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ── ANIM ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      body { padding: 0 16px 60px; }
+      .hero { padding: 48px 0 40px; }
+      .grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- NAV -->
+    <nav>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a class="nav-brand" href="#">
+          <img src="lca.ico" alt="LCA" class="nav-logo-img" />
+        </a>
+        <div class="nav-divider"></div>
+        <span class="nav-section">Internal Tools</span>
+      </div>
+      <div class="nav-status">
+        <span class="status-dot"></span>
+        All systems operational
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <p class="hero-eyebrow">Late Checkout Agency</p>
+      <h1 class="hero-title">Tool <em>Directory</em></h1>
+      <p class="hero-sub">Internal tools and resources for the team. Click any card to open the tool.</p>
+    </div>
+
+    <!-- GRID -->
+    <p class="section-label">Available — 2 tools</p>
+    <div class="grid">
+
+      <!-- Playground -->
+      <a class="card" href="https://doctronic-playground-fe-nextjs.vercel.app/" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+          <span class="card-tag">Dev</span>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Playground</h2>
+          <p class="card-desc">Interactive environment for testing and prototyping. Explore and experiment in a sandboxed space.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-url">doctronic-playground-fe-nextjs.vercel.app</span>
+          <div class="card-arrow">
+            <svg viewBox="0 0 12 12">
+              <line x1="2" y1="10" x2="10" y2="2"/>
+              <polyline points="4,2 10,2 10,8"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Dev Handoff -->
+      <a class="card" href="https://lca-devhandoff.figma.site/" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="8" rx="1"/>
+              <rect x="13" y="3" width="8" height="8" rx="1"/>
+              <rect x="3" y="13" width="8" height="8" rx="1"/>
+              <circle cx="17" cy="17" r="4"/>
+            </svg>
+          </div>
+          <span class="card-tag">Design</span>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Dev Handoff</h2>
+          <p class="card-desc">Design-to-development handoff specs. Assets, tokens, and component guidelines for implementation.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-url">lca-devhandoff.figma.site</span>
+          <div class="card-arrow">
+            <svg viewBox="0 0 12 12">
+              <line x1="2" y1="10" x2="10" y2="2"/>
+              <polyline points="4,2 10,2 10,8"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="footer-copy">© 2026 Late Checkout Agency</span>
+      <span class="footer-note">Internal use only</span>
+    </footer>
+
+  </div>
+</body>
+</html>
