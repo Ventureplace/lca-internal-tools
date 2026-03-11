@@ -71,6 +71,31 @@
       border-radius: 4px;
     }
 
+    .nav-collab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-collab-sep {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--fg-subtle);
+      line-height: 1;
+    }
+
+    .nav-loblaw-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background: #C8102E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
     .nav-wordmark {
       font-family: 'DM Mono', monospace;
       font-size: 13px;
@@ -351,9 +376,17 @@
     <!-- NAV -->
     <nav>
       <div style="display:flex;align-items:center;gap:14px;">
-        <a class="nav-brand" href="#">
-          <img src="lca.ico" alt="LCA" class="nav-logo-img" />
-        </a>
+        <div class="nav-collab">
+          <a class="nav-brand" href="#">
+            <img src="lca.ico" alt="LCA" class="nav-logo-img" />
+          </a>
+          <span class="nav-collab-sep">×</span>
+          <div class="nav-loblaw-logo">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="3" y="13" font-family="sans-serif" font-size="12" font-weight="700" fill="white">L</text>
+            </svg>
+          </div>
+        </div>
         <div class="nav-divider"></div>
         <span class="nav-section">Internal Tools</span>
       </div>
@@ -365,9 +398,9 @@
 
     <!-- HERO -->
     <div class="hero">
-      <p class="hero-eyebrow">Late Checkout Agency</p>
+      <p class="hero-eyebrow">LCA x Loblaw Digital</p>
       <h1 class="hero-title">Tool <em>Directory</em></h1>
-      <p class="hero-sub">Internal tools and resources for the team. Click any card to open the tool.</p>
+      <p class="hero-sub">A collection of internal tools and prototypes built to support the LCA x Loblaw Digital collaboration. Each tool helps the team test ideas, accelerate development, and improve how we design and ship products. Click any card to experiment!</p>
     </div>
 
     <!-- GRID -->
@@ -385,8 +418,8 @@
           <span class="card-tag">Dev</span>
         </div>
         <div class="card-body">
-          <h2 class="card-title">Playground</h2>
-          <p class="card-desc">Interactive environment for testing and prototyping. Explore and experiment in a sandboxed space.</p>
+          <h2 class="card-title">Doctronic API Playground</h2>
+          <p class="card-desc">Test prompts directly against the Doctronic API and preview how the agent will respond. This environment allows the team to quickly iterate on prompts and evaluate response quality before integrating changes into Remedy.</p>
         </div>
         <div class="card-footer">
           <span class="card-url">doctronic-playground-fe-nextjs.vercel.app</span>
@@ -414,7 +447,7 @@
         </div>
         <div class="card-body">
           <h2 class="card-title">Dev Handoff</h2>
-          <p class="card-desc">Design-to-development handoff specs. Assets, tokens, and component guidelines for implementation.</p>
+          <p class="card-desc">Generate detailed component specifications from Figma designs. Automatically creates spacing, styling, and implementation guidelines for developers.</p>
         </div>
         <div class="card-footer">
           <span class="card-url">lca-devhandoff.figma.site</span>
@@ -431,7 +464,7 @@
 
     <!-- FOOTER -->
     <footer>
-      <span class="footer-copy">© 2026 Late Checkout Agency</span>
+      <span class="footer-copy">© 2026 LCA x Loblaw Digital</span>
       <span class="footer-note">Internal use only</span>
     </footer>
 
