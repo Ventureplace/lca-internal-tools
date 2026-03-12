@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Rubric — LCA x Loblaw Digital</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #F5F4F0;
+      --bg-card: #FFFFFF;
+      --fg: #111110;
+      --fg-muted: #6B6A65;
+      --fg-subtle: #9B9A95;
+      --border: #E4E3DF;
+      --border-hover: #C8C7C2;
+      --tag-bg: #EEEDEA;
+      --tag-fg: #6B6A65;
+      --radius: 12px;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 24px 80px;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--fg);
+    }
+
+    .nav-logo-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .nav-collab { display: flex; align-items: center; gap: 8px; }
+
+    .nav-collab-sep {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--fg-subtle);
+      line-height: 1;
+    }
+
+    .nav-loblaw-logo { height: 18px; width: auto; flex-shrink: 0; display: block; }
+
+    .nav-divider { width: 1px; height: 16px; background: var(--border); }
+
+    .nav-section {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--fg-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+    .nav-back:hover { color: var(--fg); }
+
+    /* HERO */
+    .hero {
+      padding: 72px 0 56px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      margin-bottom: 20px;
+    }
+
+    .hero-title em { font-style: italic; font-weight: 300; }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    /* CONTENT */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.2s forwards;
+    }
+
+    .dimensions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.25s forwards;
+    }
+
+    .dimension-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .dimension-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tag-fg);
+      background: var(--tag-bg);
+      padding: 4px 9px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .dimension-title {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .dimension-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+
+    /* SCALE */
+    .scale-section {
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.32s forwards;
+    }
+
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .scale-item {
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .scale-item.green { background: #d4edda; border-color: #b8ddc4; }
+    .scale-item.yellow { background: #fff3cd; border-color: #ffe8a1; }
+    .scale-item.red { background: #f8d7da; border-color: #f1b9be; }
+
+    .scale-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .scale-item.green .scale-label { color: #155724; }
+    .scale-item.yellow .scale-label { color: #856404; }
+    .scale-item.red .scale-label { color: #721c24; }
+
+    .scale-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .scale-item.green .scale-desc { color: #155724; }
+    .scale-item.yellow .scale-desc { color: #856404; }
+    .scale-item.red .scale-desc { color: #721c24; }
+
+    /* HOW TO USE */
+    .how-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.39s forwards;
+    }
+
+    .how-title {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--fg-subtle);
+      background: var(--tag-bg);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.6;
+    }
+
+    .step-text strong { color: var(--fg); font-weight: 500; }
+
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      background: var(--tag-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--fg);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.5s forwards;
+    }
+
+    .footer-copy, .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+    }
+
+    /* ANIM */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 0 16px 60px; }
+      .hero { padding: 48px 0 40px; }
+      .dimensions-grid { grid-template-columns: 1fr; }
+      .scale-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- NAV -->
+    <nav>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="nav-collab">
+          <a class="nav-brand" href="index.html">
+            <img src="lca.ico" alt="LCA" class="nav-logo-img" />
+          </a>
+          <span class="nav-collab-sep">×</span>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/db/Loblaw_Companies_Limited_logo_EN.svg"
+            alt="Loblaw Digital"
+            class="nav-loblaw-logo"
+          />
+        </div>
+        <div class="nav-divider"></div>
+        <span class="nav-section">Internal Tools</span>
+      </div>
+      <a class="nav-back" href="index.html">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="10" y1="6" x2="2" y2="6"/>
+          <polyline points="5,3 2,6 5,9"/>
+        </svg>
+        Back to directory
+      </a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <p class="hero-eyebrow">Design</p>
+      <h1 class="hero-title">Design <em>Rubric</em></h1>
+      <p class="hero-sub">A structured scoring skill for evaluating Figma designs across four dimensions. Run it in Claude Code to generate an interactive heatmap scorecard with gap severity ratings.</p>
+    </div>
+
+    <!-- DIMENSIONS -->
+    <p class="section-label">Four dimensions</p>
+    <div class="dimensions-grid">
+      <div class="dimension-card">
+        <span class="dimension-tag">01</span>
+        <h3 class="dimension-title">Trust</h3>
+        <p class="dimension-desc">Does the design make users feel safe, confident, and informed? Clear sourcing, honest tone, appropriate disclaimers, transparency about AI limitations.</p>
+      </div>
+      <div class="dimension-card">
+        <span class="dimension-tag">02</span>
+        <h3 class="dimension-title">Differentiation / Delight</h3>
+        <p class="dimension-desc">Does it feel meaningfully different from generic tools? Brand personality, moments of warmth, non-generic patterns that reflect the host app.</p>
+      </div>
+      <div class="dimension-card">
+        <span class="dimension-tag">03</span>
+        <h3 class="dimension-title">Sound UX</h3>
+        <p class="dimension-desc">Is it usable, accessible, and clear? Tap targets, contrast ratios, predictable navigation, loading states, error handling, empty states.</p>
+      </div>
+      <div class="dimension-card">
+        <span class="dimension-tag">04</span>
+        <h3 class="dimension-title">Conversion / Findability</h3>
+        <p class="dimension-desc">Does it drive adoption and return visits? Entry point clarity, onboarding clarity, re-engagement hooks, frictionless flows.</p>
+      </div>
+    </div>
+
+    <!-- SCALE -->
+    <p class="section-label">Grading scale</p>
+    <div class="scale-section">
+      <div class="scale-grid">
+        <div class="scale-item green">
+          <p class="scale-label">Strong</p>
+          <p class="scale-desc">Well-executed, no significant gaps</p>
+        </div>
+        <div class="scale-item yellow">
+          <p class="scale-label">Functional but basic</p>
+          <p class="scale-desc">Works, but generic or missing opportunities</p>
+        </div>
+        <div class="scale-item red">
+          <p class="scale-label">Gap that needs a plan</p>
+          <p class="scale-desc">Clear problem that needs design attention before launch</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <p class="section-label">How to use</p>
+    <div class="how-section">
+      <h3 class="how-title">Running the skill in Claude Code</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <p class="step-text">Open Claude Code and start a new session. The <code>figma-design-grader</code> skill should be available in your workspace.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <p class="step-text"><strong>With Figma MCP connected:</strong> paste your Figma URL directly — Claude will pull design context, layer structure, and token usage automatically.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <p class="step-text"><strong>Without MCP:</strong> export and upload a screenshot of your design. Claude grades visually and marks structural cells as unable to assess.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <p class="step-text">Claude outputs a <strong>self-contained HTML scorecard</strong> — an interactive heatmap with hover tooltips, a summary bar, and gap severity badges per primitive.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <p class="step-text">Ask for a <strong>prioritized action list</strong> sorted by gap severity, or drill into any specific primitive for deeper analysis.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="footer-copy">© 2026 LCA x Loblaw Digital</span>
+      <span class="footer-note">Internal use only</span>
+    </footer>
+
+  </div>
+</body>
+</html>
