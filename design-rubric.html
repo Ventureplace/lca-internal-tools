@@ -298,6 +298,102 @@
       color: var(--fg);
     }
 
+    /* SKILL SECTION */
+    .skill-section {
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.46s forwards;
+    }
+
+    .skill-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .skill-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      background: var(--bg-card);
+      color: var(--fg-muted);
+      line-height: 1;
+    }
+
+    .btn:hover {
+      background: var(--tag-bg);
+      border-color: var(--border-hover);
+      color: var(--fg);
+    }
+
+    .btn svg { flex-shrink: 0; }
+
+    .btn-copy.copied {
+      background: #d4edda;
+      border-color: #b8ddc4;
+      color: #155724;
+    }
+
+    .skill-box {
+      background: #1a1a18;
+      border-radius: var(--radius);
+      border: 1px solid #333330;
+      overflow: hidden;
+    }
+
+    .skill-box-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid #333330;
+    }
+
+    .skill-box-filename {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #888882;
+    }
+
+    .skill-box pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .skill-box pre::-webkit-scrollbar { width: 6px; height: 6px; }
+    .skill-box pre::-webkit-scrollbar-track { background: transparent; }
+    .skill-box pre::-webkit-scrollbar-thumb { background: #444440; border-radius: 3px; }
+
+    .skill-box code {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #d4d4c8;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      white-space: pre;
+    }
+
     /* FOOTER */
     footer {
       margin-top: 80px;
@@ -439,6 +535,157 @@
       </div>
     </div>
 
+    <!-- SKILL -->
+    <p class="section-label">Skill file</p>
+    <div class="skill-section">
+      <div class="skill-header">
+        <div></div>
+        <div class="skill-actions">
+          <button class="btn btn-copy" onclick="copySkill(this)">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="4" y="4" width="7" height="7" rx="1"/>
+              <path d="M8 4V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2"/>
+            </svg>
+            Copy
+          </button>
+          <a class="btn" href="figma-design-grader.md" download>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <line x1="6" y1="1" x2="6" y2="8"/>
+              <polyline points="3,5.5 6,8.5 9,5.5"/>
+              <line x1="1" y1="11" x2="11" y2="11"/>
+            </svg>
+            Download .md
+          </a>
+        </div>
+      </div>
+      <div class="skill-box">
+        <div class="skill-box-bar">
+          <span class="skill-box-filename">figma-design-grader.md</span>
+        </div>
+        <pre><code id="skill-content"># Figma Design Grader
+
+Grades a design across four dimensions and outputs an interactive heatmap scorecard with gap severity ratings.
+
+---
+
+## Step 1: Detect Input Tier
+
+Before grading, determine what&#39;s available:
+
+**Tier 1 — Figma MCP connected + URL provided**
+Use `get_design_context` (includes screenshot + specs) and `get_metadata` for layer structure.
+
+**Tier 2 — No MCP, but Figma URL provided**
+Ask: "I don&#39;t have Figma MCP access — can you export and upload a screenshot?" Then proceed as Tier 3.
+
+**Tier 3 — Image uploaded only**
+Grade purely from visual inspection. Note that structural/token grading is unavailable without MCP.
+
+---
+
+## Step 2: Pull the Design (Tier 1 only)
+
+1. Call `get_design_context` with file key + node ID from the URL
+2. Call `get_metadata` on the same node for layer structure and naming
+3. Optionally call `get_variable_defs` to check token usage vs hardcoded values
+
+URL format: `https://figma.com/design/:fileKey/:fileName?node-id=1-2`
+→ fileKey = `:fileKey`, nodeId = `1:2`
+
+---
+
+## Step 3: Grade Against the Rubric
+
+### The Four Dimensions
+
+| Dimension | What It Measures |
+|---|---|
+| Trust | Safe, confident, informed? Clear sourcing, honest tone, no false urgency, medical disclaimers, AI transparency. |
+| Differentiation / Delight | Meaningfully different from ChatGPT or WebMD? Brand personality, warmth, non-generic patterns. |
+| Sound UX | Usable, accessible, clear? Tap targets, contrast, CTAs, navigation, loading/error/empty states. |
+| Conversion / Findability | Drives adoption and return visits? Entry point clarity, onboarding, re-engagement hooks, frictionless flows. |
+
+### Grading Scale
+
+| Score | Color | Meaning |
+|---|---|---|
+| Strong | Green (#d4edda) | Well-executed, no significant gaps |
+| Functional but basic | Yellow (#fff3cd) | Works, but generic or missing opportunities |
+| Gap that needs a plan | Red (#f8d7da) | Clear problem needing design attention before launch |
+
+### Gap Severity (per primitive)
+
+- **Low** — Mostly green, minor polish needed
+- **Moderate** — Mix of green/yellow, some gaps to address
+- **High** — Multiple yellow/red cells, significant design debt
+- **Critical** — Predominantly red, fundamental problems
+
+---
+
+## Step 4: Identify Primitives
+
+Grade these by default (skip absent ones, add others if needed):
+
+- Entry point
+- Onboarding / Welcome
+- Consent &amp; permissions
+- Chat input &amp; interaction
+- Streaming / loading states
+- Response rendering
+- Sources &amp; verifiability
+- Contextual chips / suggestions
+- Navigation &amp; care routing
+- Chat history
+- Red-flag escalation
+- Abstention ("I don&#39;t know") states
+- Medication guidance UI
+- Triage UI
+
+---
+
+## Step 5: Output the Scorecard
+
+Generate an **interactive HTML visualization** — not a text table.
+
+**Chart structure:**
+- Rows = Primitives
+- Columns = Trust | Diff/Delight | Sound UX | Conversion
+- + MVP notes column (brief observation per primitive)
+- + Gap severity badge column
+
+**Color coding:**
+- Green: #d4edda / #155724 → "Strong"
+- Yellow: #fff3cd / #856404 → "Functional but basic"
+- Red: #f8d7da / #721c24 → "Gap that needs a plan"
+- Gray: #e9ecef → "Unable to assess"
+
+**Gap badge colors:** Low = green | Moderate = yellow | High = orange (#fd7e14) | Critical = red
+
+**Required:** Hover tooltips (1–2 sentence rationale), summary bar, legend, responsive layout.
+
+Output as a single self-contained HTML artifact with inline CSS/JS. No external dependencies except Google Fonts.
+
+---
+
+## Step 6: Follow-up
+
+After the chart, offer:
+1. "Want me to go deeper on any specific primitive?"
+2. "I can generate a prioritized action list sorted by gap severity if useful."
+
+---
+
+## Notes for Tier 3 (image only)
+
+- **Trust:** disclaimers visible, tone of copy, source attribution
+- **Diff/Delight:** visual distinctiveness, brand personality
+- **Sound UX:** layout clarity, tap targets, contrast, hierarchy
+- **Conversion:** entry point clarity, CTA visibility, friction points
+
+Mark cells "Unable to assess" (gray) where the screenshot lacks enough information.</code></pre>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
       <span class="footer-copy">© 2026 LCA x Loblaw Digital</span>
@@ -446,5 +693,19 @@
     </footer>
 
   </div>
+  <script>
+    function copySkill(btn) {
+      const text = document.getElementById('skill-content').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add('copied');
+        btn.querySelector('svg').outerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,6 4,9 11,3"/></svg>';
+        btn.childNodes[btn.childNodes.length - 1].textContent = 'Copied';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="7" height="7" rx="1"/><path d="M8 4V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2"/></svg> Copy';
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>
