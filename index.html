@@ -66,8 +66,8 @@
     }
 
     .nav-logo-img {
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
       object-fit: contain;
       border-radius: 4px;
     }
@@ -464,6 +464,228 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
 
+    /* ── BOARD NOTIFICATION ── */
+    .board-notif {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .board-notif.notif-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .board-notif.notif-hiding {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    .notif-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+      flex-shrink: 0;
+    }
+
+    .notif-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+
+    .notif-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--fg);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notif-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+      flex-shrink: 0;
+    }
+
+    .notif-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      color: var(--fg-subtle);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+
+    .notif-close:hover { color: var(--fg); }
+    .notif-close svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+    .notif-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--border-hover);
+      border-radius: 0 0 10px 10px;
+      width: 100%;
+      transform-origin: left;
+      animation: notif-drain 10s linear forwards;
+    }
+
+    @keyframes notif-drain {
+      from { transform: scaleX(1); }
+      to   { transform: scaleX(0); }
+    }
+
+    /* ── BOARD ── */
+    .board-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .board-open-sheet {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .board-open-sheet:hover { color: var(--fg); }
+
+    .board-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .board-post {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+
+    .board-post.post-done { opacity: 0.5; }
+
+    .board-post-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .post-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 100px;
+    }
+
+    .post-tag-update { color: #1A56DB; background: #E8F0FE; }
+    .post-tag-ticket { color: #7B6200; background: #FFF8E1; }
+    .post-tag-alert  { color: #B91C1C; background: #FEE2E2; }
+
+    .post-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-subtle);
+    }
+
+    .post-status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .dot-open { background: #4CAF50; }
+    .dot-done { background: var(--fg-subtle); }
+
+    .post-meta {
+      margin-left: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-subtle);
+      display: flex;
+      gap: 12px;
+    }
+
+    .board-post-title {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .board-post-body {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .board-state {
+      padding: 48px 0;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--fg-subtle);
+    }
+
+    .board-refresh {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--fg-muted);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .board-refresh:hover {
+      border-color: var(--border-hover);
+      color: var(--fg);
+    }
+
     /* ── FOOTER ── */
     footer {
       margin-top: 80px;
@@ -525,6 +747,8 @@
           <img src="lca.ico" alt="LCA" class="nav-logo-img" />
         </a>
         <div class="nav-divider"></div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Loblaw_Companies_Limited_logo_EN.svg" alt="Loblaw" style="height:22px;width:auto;opacity:0.75;" />
+        <div class="nav-divider"></div>
         <span class="nav-section">Internal Tools</span>
       </div>
       <div class="nav-status">
@@ -532,6 +756,18 @@
         All systems operational
       </div>
     </nav>
+
+    <!-- BOARD NOTIFICATION -->
+    <div class="board-notif" id="board-notif" style="position:relative;">
+      <span class="notif-dot"></span>
+      <span class="notif-type post-tag-update" id="notif-type"></span>
+      <span class="notif-text" id="notif-text"></span>
+      <span class="notif-meta" id="notif-meta"></span>
+      <button class="notif-close" onclick="dismissNotif()" title="Dismiss">
+        <svg viewBox="0 0 14 14"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+      </button>
+      <div class="notif-progress" id="notif-progress"></div>
+    </div>
 
     <!-- HERO -->
     <div class="hero">
@@ -544,6 +780,7 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('tools', this)">Tools</button>
       <button class="tab-btn" onclick="switchTab('figma', this)">Figma Designs</button>
+      <button class="tab-btn" onclick="switchTab('board', this)">Board</button>
     </div>
 
     <!-- TAB: TOOLS -->
@@ -739,6 +976,21 @@
       </div>
     </div>
 
+    <!-- TAB: BOARD -->
+    <div class="tab-pane" id="tab-board">
+      <div class="board-header">
+        <p class="section-label" id="board-count" style="margin-bottom:0">Board</p>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <button class="board-refresh" onclick="fetchBoard()">Refresh</button>
+          <a class="board-open-sheet" id="board-sheet-link" href="#" target="_blank" rel="noopener">
+            Open Sheet
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+          </a>
+        </div>
+      </div>
+      <div id="board-list" class="board-list"></div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
       <span class="footer-copy">© 2026 Late Checkout Agency</span>
@@ -754,6 +1006,139 @@
       document.getElementById('tab-' + name).classList.add('active');
       btn.classList.add('active');
     }
+
+    // ── BOARD ──
+    // Paste your Google Sheet ID here (the long string in the sheet URL between /d/ and /edit)
+    const SHEET_ID = '17sfw7d3OGQ27cr-IvAHglYnpeWV-0iLcJz5RPHd3_2M';
+    const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=52377503`;
+    document.getElementById('board-sheet-link').href =
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = '', inQuote = false;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i], next = text[i + 1];
+        if (inQuote) {
+          if (ch === '"' && next === '"') { field += '"'; i++; }
+          else if (ch === '"') { inQuote = false; }
+          else { field += ch; }
+        } else {
+          if (ch === '"') { inQuote = true; }
+          else if (ch === ',') { row.push(field); field = ''; }
+          else if (ch === '\n' || (ch === '\r' && next === '\n')) {
+            if (ch === '\r') i++;
+            row.push(field); field = '';
+            rows.push(row); row = [];
+          } else { field += ch; }
+        }
+      }
+      if (field || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    function renderBoard(posts) {
+      const list = document.getElementById('board-list');
+      const count = document.getElementById('board-count');
+      if (!posts.length) {
+        count.textContent = 'Board — 0 posts';
+        list.innerHTML = '<div class="board-state">No posts yet.</div>';
+        return;
+      }
+      count.textContent = `Board — ${posts.length} post${posts.length !== 1 ? 's' : ''}`;
+      list.innerHTML = posts.map(p => {
+        const [date, type, title, body, status, author] = p;
+        const typeKey = (type || '').toLowerCase();
+        const tagClass = typeKey === 'alert' ? 'post-tag-alert'
+                       : typeKey === 'ticket' ? 'post-tag-ticket'
+                       : 'post-tag-update';
+        const isDone = (status || '').toLowerCase() === 'done';
+        return `
+        <div class="board-post${isDone ? ' post-done' : ''}">
+          <div class="board-post-top">
+            <span class="post-tag ${tagClass}">${type || 'Update'}</span>
+            <span class="post-status">
+              <span class="post-status-dot ${isDone ? 'dot-done' : 'dot-open'}"></span>
+              ${isDone ? 'Done' : 'Open'}
+            </span>
+            <span class="post-meta">
+              ${author ? `<span>${author}</span>` : ''}
+              ${date ? `<span>${date}</span>` : ''}
+            </span>
+          </div>
+          ${title ? `<div class="board-post-title">${title}</div>` : ''}
+          ${body ? `<div class="board-post-body">${body}</div>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    async function fetchBoard() {
+      const list = document.getElementById('board-list');
+      const count = document.getElementById('board-count');
+      if (SHEET_ID === 'YOUR_SHEET_ID_HERE') {
+        count.textContent = 'Board';
+        list.innerHTML = '<div class="board-state">Paste your Google Sheet ID into the SHEET_ID constant to load posts.</div>';
+        return;
+      }
+      list.innerHTML = '<div class="board-state">Fetching board…</div>';
+      try {
+        const res = await fetch(CSV_URL);
+        if (!res.ok) throw new Error();
+        const text = await res.text();
+        const rows = parseCSV(text);
+        const posts = rows.slice(1).filter(r => r.some(c => c.trim()));
+        posts.sort((a, b) => (b[0] || '').localeCompare(a[0] || ''));
+        renderBoard(posts);
+      } catch {
+        count.textContent = 'Board';
+        list.innerHTML = `<div class="board-state">Could not load board. <button class="board-refresh" onclick="fetchBoard()" style="margin-left:12px">Retry</button></div>`;
+      }
+    }
+
+    fetchBoard();
+
+    // ── NOTIFICATION ──
+    let notifTimer = null;
+
+    function dismissNotif() {
+      const el = document.getElementById('board-notif');
+      el.classList.remove('notif-visible');
+      el.classList.add('notif-hiding');
+      clearTimeout(notifTimer);
+    }
+
+    async function fetchNotif() {
+      if (SHEET_ID === 'YOUR_SHEET_ID_HERE') return;
+      try {
+        const res = await fetch(CSV_URL);
+        if (!res.ok) return;
+        const text = await res.text();
+        const rows = parseCSV(text);
+        const posts = rows.slice(1).filter(r => r.some(c => c.trim()));
+        if (!posts.length) return;
+        posts.sort((a, b) => (b[0] || '').localeCompare(a[0] || ''));
+        const [date, type, title, , , author] = posts[0];
+        const typeKey = (type || '').toLowerCase();
+        const tagClass = typeKey === 'alert' ? 'post-tag-alert'
+                       : typeKey === 'ticket' ? 'post-tag-ticket'
+                       : 'post-tag-update';
+        const el = document.getElementById('board-notif');
+        document.getElementById('notif-type').textContent = type || 'Update';
+        document.getElementById('notif-type').className = `notif-type post-tag ${tagClass}`;
+        document.getElementById('notif-text').textContent = title || '(no title)';
+        document.getElementById('notif-meta').textContent = [author, date].filter(Boolean).join(' · ');
+        // restart progress bar
+        const prog = document.getElementById('notif-progress');
+        prog.style.animation = 'none';
+        prog.offsetHeight; // reflow
+        prog.style.animation = '';
+        el.classList.remove('notif-hiding');
+        el.classList.add('notif-visible');
+        notifTimer = setTimeout(dismissNotif, 10000);
+      } catch { /* silent */ }
+    }
+
+    fetchNotif();
   </script>
 </body>
 </html>
