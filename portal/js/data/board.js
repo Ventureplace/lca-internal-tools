@@ -47,17 +47,14 @@ export function recordIdFor(task) {
 }
 
 /*
- * Canonical "open this task" URL. Priority order:
- *   1. Known Slack-list record_id deep link (best — lands on the task itself)
- *   2. First useful URL extracted from Comments / Description (Slack thread
- *      → Figma frame → Coda doc → any other)
- *   3. Slack list root (fallback so the click is never dead)
+ * Canonical "open this task" URL.
+ *
+ * Slack's record_id deep-link parameter on enterprise grid lists is currently
+ * unreliable (lands users on a random DM instead of the record), so for now
+ * every task click goes to the main board. Once Slack honours the deep links
+ * (or we move to a different mirror) the helpers above can be reactivated.
  */
-export function taskUrl(task) {
-  const id = recordIdFor(task);
-  if (id) return slackRecordUrl(id);
-  const ex = extractTaskLink(task);
-  if (ex) return ex.url;
+export function taskUrl(/* task */) {
   return SLACK_LIST_URL;
 }
 
