@@ -1598,3 +1598,168 @@ a.card:hover .card-arrow {
   .nav-status { display: none; }
   .app-footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * MOBILE PASS — phone & tablet refinements for every page in the portal.
+ *
+ * Breakpoints:
+ *   ≤ 1000px  Tablet landscape — quicknav drops to 3 cols (set above)
+ *   ≤ 860px   Tablet portrait  — designs/PRD sidebars collapse to top
+ *   ≤ 720px   Phone landscape  — nav links scroll, toolbar stacks, sticky off
+ *   ≤ 480px   Phone portrait   — hide secondary lockup pieces, denser type
+ *   ≤ 380px   Compact phone    — single-column quicknav
+ * ──────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 860px) {
+  /* DESIGNS — Figma iframe doesn't read at 16:10 on tall portrait screens */
+  .frame { aspect-ratio: 4 / 5; min-height: 360px; }
+
+  /* TIMELINE LEDGER — tighter label column, smaller min-width before scroll */
+  .ledger { --row-label-w: 180px; }
+  .ledger-grid { min-width: 880px; }
+
+  /* REQUIREMENTS — switch tab rail from wrap to horizontal scroll
+   * so 22 tabs don't stack into a wall above the content */
+  .prd-rail {
+    position: static;
+    max-height: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding: 8px;
+  }
+  .prd-rail::-webkit-scrollbar { display: none; }
+  .prd-rail-label { display: none; }
+  .prd-tab {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  /* NAV — drop sticky, lockup tightens, links horizontal-scroll, status hidden.
+   * Sticky + wrapping nav eats too much vertical space on a phone. */
+  .app-nav {
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    margin: 0;
+    padding: var(--space-2) 0 0;
+    gap: var(--space-1);
+  }
+  .brand-lockup { gap: 8px; min-width: 0; flex: 1; }
+  .brand-lockup .loblaw-mark { height: 18px; }
+  .brand-lockup .lca-mark { width: 22px; height: 22px; }
+  .brand-x { font-size: 16px; padding: 0 2px; }
+  .nav-section { font-size: 10px; }
+  .nav-status { display: none; }
+  .nav-links {
+    order: 3;
+    width: auto;
+    margin: 8px calc(var(--space-2) * -1) 0;
+    padding: 8px var(--space-2);
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { white-space: nowrap; flex-shrink: 0; padding: 4px 0; }
+  .nav-link.active::after { bottom: -9px; }
+
+  /* HOME — tighter hero so the kanban shows above the fold */
+  .home-page .hero { padding: var(--space-3) 0 var(--space-2); }
+
+  /* SECTIONS — reduce vertical breathing across all pages */
+  .section { padding: var(--space-3) 0 var(--space-2); }
+  .section-head { margin-bottom: var(--space-2); }
+
+  /* HERO sub copy on non-home pages */
+  .hero { padding: var(--space-4) 0 var(--space-2); }
+  .hero-sub { font-size: var(--fs-meta); }
+
+  /* BOARD TOOLBAR — each filter group on its own line, smaller buttons */
+  .toolbar { padding: var(--space-2); gap: var(--space-1); }
+  .toolbar-spacer { flex-basis: 100%; height: 0; }
+  .toolbar-group { flex-basis: 100%; flex-wrap: wrap; }
+  .toolbar-group-label { width: 100%; margin-right: 0; margin-bottom: 4px; }
+  .toolbar-meta { font-size: 10px; flex-basis: 100%; text-align: left; padding-top: 4px; border-top: 1px solid var(--line-soft); }
+  .toolbar .btn { height: 32px; padding: 0 12px; font-size: 11px; }
+  .filter-pill { padding: 5px 10px; }
+
+  /* DESIGNS — segmented control compact */
+  .segmented button { padding: 6px 10px; font-size: 11px; }
+
+  /* PRD CTA — title shrinks, action buttons take full width side-by-side */
+  .prd-cta { gap: var(--space-2); padding: var(--space-2); }
+  .prd-cta-title { font-size: 18px; }
+  .prd-cta-actions { width: 100%; gap: 8px; margin-left: 0; }
+  .prd-cta-actions .btn { flex: 1; }
+
+  /* PRD CONTENT — denser type so paragraphs fit a phone column */
+  .prd-content { padding: var(--space-2); }
+  .prd-content h1 { font-size: 26px; }
+  .prd-content h2 { font-size: 20px; }
+  .prd-content h3 { font-size: 17px; }
+  .prd-content h4 { font-size: 10px; }
+  .prd-content p, .prd-content ul li { font-size: 14px; }
+
+  /* RESOURCES — Documents/Tools cards already drop to 1 col via grid-fluid */
+  .card { padding: var(--space-2); gap: var(--space-2); }
+
+  /* KANBAN cards — cards inside columns get a bit denser */
+  .task { padding: 10px 12px; }
+  .task-title { font-size: 14px; }
+
+  /* GANTT row — keep horizontal scroll friendly to touch */
+  .ledger { -webkit-overflow-scrolling: touch; }
+}
+
+@media (max-width: 480px) {
+  /* NAV — drop the divider + section pill on the smallest screens */
+  .nav-divider { display: none; }
+  .nav-section { display: none; }
+  .brand-lockup .loblaw-mark { height: 16px; }
+  .brand-lockup .lca-mark { width: 20px; height: 20px; }
+  .brand-x { font-size: 14px; }
+
+  /* BODY padding tighter */
+  body { padding: 0 var(--space-2) var(--space-5); }
+
+  /* Cards type ramp */
+  .card-title { font-size: 15px; }
+  .card-desc { font-size: 12px; }
+
+  /* Hero on home stays the headline only */
+  .hero { padding: var(--space-3) 0 var(--space-1); }
+
+  /* PRD download/open buttons stack rather than tile */
+  .prd-cta-actions { flex-direction: column; }
+  .prd-cta-actions .btn { width: 100%; }
+
+  /* Timeline ledger — narrower label column */
+  .ledger { --row-label-w: 140px; }
+  .ledger-grid { min-width: 720px; }
+  .ledger-label { padding: 8px 10px; font-size: 12px; }
+  .ledger-section-title { font-size: 14px; }
+  .ledger-section { padding: 10px 12px 8px; }
+
+  /* Quicknav copy shrinks */
+  .quicknav-tile-title { font-size: 13px; }
+
+  /* Designs page — sidebar metadata tighter */
+  .sublink { padding: 6px 8px; font-size: 12px; }
+}
+
+@media (max-width: 380px) {
+  /* Quicknav goes single column on the smallest devices */
+  .quicknav { grid-template-columns: 1fr; }
+}

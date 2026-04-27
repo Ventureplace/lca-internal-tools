@@ -1,9 +1,10 @@
 /*
  * Figma file constants — IDs, metadata, section deep-links.
  *
- * V1 section URLs preserved verbatim from the previous index.html (file ID
- * unchanged; the SHARED file was just renamed). V2 is the LCA internal working
- * file for the V2.0 build — sections to be added as designs land.
+ * Both V1 and V2 point to the SHARED Loblaw Digital design files (using
+ * the auto-load query params Creighton supplied so the embed lands on the
+ * canonical entry frame). V1 keeps its preserved section deep-links;
+ * V2 starts with a single Cover entry — add more node-ids as designs land.
  *
  * `embedUrl(canonicalUrl)` wraps any Figma URL in the embed pattern Figma documents:
  *   https://www.figma.com/embed?embed_host=share&url=<encoded>
@@ -14,7 +15,15 @@ export function embedUrl(canonicalUrl) {
 }
 
 const V1_FILE = 'cKsRu32uAlYS3tklgxnlyr';
-const V2_FILE = '1am3gguvU9eF7TDgk4ipJh';
+const V1_PATH = '-SHARED--Project-Remedy-V1.0';
+const V1_QUERY = '?m=auto&t=pKrp3u9QgHlxdYqL-6';
+
+const V2_FILE = 'G3joMlCs42Suu3T3Mw75Wg';
+const V2_PATH = '-SHARED--Project-Remedy-V2.0';
+const V2_QUERY = '?m=auto&t=pKrp3u9QgHlxdYqL-6';
+
+const v1Url = (extra = '') => `https://www.figma.com/design/${V1_FILE}/${V1_PATH}${extra || V1_QUERY}`;
+const v2Url = (extra = '') => `https://www.figma.com/design/${V2_FILE}/${V2_PATH}${extra || V2_QUERY}`;
 
 export const VERSIONS = [
   {
@@ -25,12 +34,12 @@ export const VERSIONS = [
     tagClass: 'mint',
     audience: 'GA — Ontario launch',
     date: 'May 1, 2026',
-    desc: 'LCA internal working file for the V2.0 build. Active design surface.',
+    desc: 'Loblaw Digital shared design file for the V2.0 GA build. Active design surface.',
     fileId: V2_FILE,
-    fileUrl: `https://www.figma.com/design/${V2_FILE}/-Internal--Project-Remedy-V2.0?node-id=2001-16`,
-    coverFrame: `https://www.figma.com/design/${V2_FILE}/-Internal--Project-Remedy-V2.0?node-id=2001-16`,
+    fileUrl: v2Url(),
+    coverFrame: v2Url(),
     sections: [
-      { name: 'Cover', url: `https://www.figma.com/design/${V2_FILE}/-Internal--Project-Remedy-V2.0?node-id=2001-16` },
+      { name: 'Cover', url: v2Url() },
     ],
   },
   {
@@ -43,17 +52,17 @@ export const VERSIONS = [
     date: 'Apr 1, 2026',
     desc: 'Loblaw Digital shared design file for the V1 pilot release.',
     fileId: V1_FILE,
-    fileUrl: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=6005-225093`,
-    coverFrame: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=6005-225093`,
+    fileUrl: v1Url(),
+    coverFrame: v1Url(),
     sections: [
-      { name: 'Cover',                  url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=6005-225093` },
-      { name: 'Entry Point',            url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45852` },
-      { name: 'Chat UI',                url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45851` },
-      { name: 'Chat Components',        url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=3037-4232` },
-      { name: 'Consent & Permissions',  url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45855` },
-      { name: 'Conversation History',   url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45853` },
-      { name: 'Nav & Care Routing',     url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45857` },
-      { name: 'Red Flag Escalation',    url: `https://www.figma.com/design/${V1_FILE}/-SHARED--Project-Remedy-V1.0?node-id=2807-45859` },
+      { name: 'Cover',                  url: v1Url() },
+      { name: 'Entry Point',            url: v1Url('?node-id=2807-45852') },
+      { name: 'Chat UI',                url: v1Url('?node-id=2807-45851') },
+      { name: 'Chat Components',        url: v1Url('?node-id=3037-4232') },
+      { name: 'Consent & Permissions',  url: v1Url('?node-id=2807-45855') },
+      { name: 'Conversation History',   url: v1Url('?node-id=2807-45853') },
+      { name: 'Nav & Care Routing',     url: v1Url('?node-id=2807-45857') },
+      { name: 'Red Flag Escalation',    url: v1Url('?node-id=2807-45859') },
     ],
   },
 ];
