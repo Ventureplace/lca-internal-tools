@@ -29,38 +29,33 @@ function escapeHtml(s) {
 const QUICKNAV_TILES = [
   {
     href: 'requirements.html',
-    title: '<em>Requirements</em>',
+    title: 'Requirements',
     countLabel: 'Live PRD',
-    arrowLabel: 'Vision · Roadmap · Workstreams',
     icon: `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
   },
   {
     href: 'designs.html',
-    title: '<em>Designs</em>',
+    title: 'Designs',
     countLabel: 'V1 · V2',
-    arrowLabel: 'Figma files & specs',
     icon: `<svg viewBox="0 0 24 24"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 0 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>`,
   },
   {
     href: 'board.html',
-    title: '<em>Board</em>',
+    title: 'Board',
     countId: 'qn-board-count',
     countLabel: 'Tasks',
-    arrowLabel: 'Slack-list mirror',
     icon: `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>`,
   },
   {
     href: 'timeline.html',
-    title: '<em>Timeline</em>',
+    title: 'Timeline',
     countLabel: 'Workstreams',
-    arrowLabel: 'Design Review Ledger',
     icon: `<svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="11" cy="18" r="2"/></svg>`,
   },
   {
     href: 'resources.html',
-    title: '<em>Resources</em>',
+    title: 'Resources',
     countLabel: 'Tools · Decks',
-    arrowLabel: 'Doctronic, V1 components',
     icon: `<svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>`,
   },
 ];
@@ -72,15 +67,12 @@ function renderQuicknav() {
   if (!el) return;
   el.innerHTML = QUICKNAV_TILES.map(t => `
     <a class="quicknav-tile" href="${t.href}">
-      <div class="quicknav-tile-top">
-        <div class="quicknav-tile-icon">${t.icon}</div>
+      <div class="quicknav-tile-icon">${t.icon}</div>
+      <div class="quicknav-tile-body">
+        <span class="quicknav-tile-title">${escapeHtml(t.title)}</span>
         <span class="quicknav-tile-count" ${t.countId ? `id="${t.countId}"` : ''}>${escapeHtml(t.countLabel)}</span>
       </div>
-      <div class="quicknav-tile-title">${t.title}</div>
-      <div class="quicknav-tile-arrow">
-        <span>${escapeHtml(t.arrowLabel)}</span>
-        ${ARROW_OUT}
-      </div>
+      <span class="quicknav-tile-arrow">${ARROW_OUT}</span>
     </a>
   `).join('');
 }
@@ -110,12 +102,13 @@ function pickTaskUrl(task) {
 
 function taskCard(t, { compact } = {}) {
   const url = pickTaskUrl(t);
-  const isHigh = (t.priority || '').toLowerCase() === 'high';
+  const p = (t.priority || '').toLowerCase();
+  const priorityCls = (p === 'high' || p === 'medium' || p === 'low') ? `priority-${p}` : '';
   const isDone = (t.status || '').toLowerCase() === 'done';
   const v = versionOf(t);
   const vClass = v === 'v1' ? 'sky' : v === 'v2' ? 'mint' : 'navy';
   return `
-    <a class="task ${isHigh ? 'priority-high' : ''} ${isDone ? 'done' : ''}" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Open in Slack list">
+    <a class="task ${priorityCls} ${isDone ? 'done' : ''}" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Open in Slack list">
       <div class="task-title">${escapeHtml(t.title)}</div>
       <div class="task-meta">
         <span class="tag ${vClass}">${versionLabel(t)}</span>
@@ -459,7 +452,6 @@ async function init() {
     document.getElementById('dash-timeline').innerHTML = `<div class="empty-state">Could not load timeline.</div>`;
     return;
   }
-  setHeroSub(board);
   setQuicknavCounts(board);
   renderKanban(board.tasks);
   renderTimelineSnapshot(board);

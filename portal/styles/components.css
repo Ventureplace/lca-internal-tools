@@ -106,138 +106,134 @@
   background: var(--status-open);
 }
 
-/* ── QUICKNAV — primary destination strip directly under the hero ──
+/* ── QUICKNAV — quiet 5-up strip directly under the hero ──
  *
- * Big, tactile section anchors so visitors don't have to scroll the kanban
- * to discover the rest of the portal. Each tile is editorial and high-contrast
- * so it reads as a "doorway", not a card in a list.
+ * Lives just below the "21 active · 34 shipped" line, before the kanban.
+ * No dark frame around the strip — it should blend into the page so the
+ * kanban below stays the visual focus. Icons sit on a translucent navy
+ * tint so they read clearly without shouting.
  */
+
+.home-page .hero { padding: var(--space-5) 0 var(--space-2); }
+.home-page .hero-title { font-size: clamp(34px, 4.5vw, 60px); }
+.home-page .hero-sub { font-size: var(--fs-body); max-width: 520px; }
+.home-page .section { padding: var(--space-3) 0 var(--space-2); }
+.home-page .section + .section { padding-top: var(--space-3); }
 
 .quicknav {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--space-1);
-  padding: var(--space-2);
-  background: var(--ink);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-card);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .quicknav-tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-3);
-  min-height: 140px;
-  background: var(--card-warm);
+  display: grid;
+  grid-template-columns: 30px 1fr 10px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
   text-decoration: none;
   color: var(--ink);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.quicknav-tile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 60%, var(--coral-wash) 100%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
 .quicknav-tile:hover {
-  transform: translateY(-2px);
   background: var(--card);
-  color: var(--ink);
-}
-
-.quicknav-tile:hover::after { opacity: 1; }
-
-.quicknav-tile-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-1);
+  border-color: rgba(31, 34, 58, 0.18);
+  transform: translateY(-1px);
 }
 
 .quicknav-tile-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--r-xs);
-  background: var(--coral-wash);
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(31, 34, 58, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease;
 }
 
 .quicknav-tile-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--coral);
+  width: 14px;
+  height: 14px;
+  stroke: var(--ink-2);
   stroke-width: 1.5;
   fill: none;
-  transition: stroke 0.2s ease;
+  transition: stroke 0.15s ease;
 }
 
-.quicknav-tile:hover .quicknav-tile-icon { background: var(--coral); }
-.quicknav-tile:hover .quicknav-tile-icon svg { stroke: #FFF; }
+.quicknav-tile:hover .quicknav-tile-icon {
+  background: rgba(31, 34, 58, 0.14);
+}
 
-.quicknav-tile-count {
-  font-family: var(--font-mono);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tr-eyebrow);
-  text-transform: uppercase;
-  color: var(--ink-muted);
+.quicknav-tile:hover .quicknav-tile-icon svg {
+  stroke: var(--ink);
+}
+
+.quicknav-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
 }
 
 .quicknav-tile-title {
   font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: var(--tr-tight);
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.quicknav-tile-title em { font-style: italic; color: var(--coral); }
+.quicknav-tile-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .quicknav-tile-arrow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: 0.04em;
+  justify-content: flex-end;
   color: var(--ink-muted);
+  opacity: 0.6;
+  transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
 }
 
 .quicknav-tile-arrow svg {
-  width: 14px;
-  height: 14px;
-  stroke: var(--ink-muted);
-  stroke-width: 1.5;
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  stroke-width: 2;
   fill: none;
-  transition: transform 0.2s ease, stroke 0.2s ease;
 }
 
-.quicknav-tile:hover .quicknav-tile-arrow { color: var(--coral); }
-.quicknav-tile:hover .quicknav-tile-arrow svg {
-  stroke: var(--coral);
+.quicknav-tile:hover .quicknav-tile-arrow {
+  opacity: 1;
+  color: var(--coral);
   transform: translate(2px, -2px);
 }
 
-@media (max-width: 1000px) { .quicknav { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1000px) {
+  .quicknav { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 640px) {
-  .quicknav { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 6px; }
-  .quicknav-tile { min-height: 110px; padding: var(--space-2); }
-  .quicknav-tile-title { font-size: 18px; }
+  .quicknav { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── NAV — slightly stronger contrast, sticky on scroll ── */
@@ -775,16 +771,23 @@ a.card:hover .card-arrow {
   transform: translateY(-1px);
 }
 
-.task.priority-high::before {
+/* Priority edge stripe — same shape, color follows the priority palette
+ * so the stripe, the dot, and the tag all match. */
+.task.priority-high::before,
+.task.priority-medium::before,
+.task.priority-low::before {
   content: '';
   position: absolute;
   left: 0;
   top: 12px;
   bottom: 12px;
   width: 3px;
-  background: var(--coral);
   border-radius: 0 3px 3px 0;
 }
+
+.task.priority-high::before   { background: var(--coral); }
+.task.priority-medium::before { background: var(--amber-fg); }
+.task.priority-low::before    { background: var(--sky-ink); }
 
 .task-title {
   font-family: var(--font-serif);

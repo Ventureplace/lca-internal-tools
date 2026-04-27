@@ -104,12 +104,13 @@ function formatTime(d) {
 
 function taskCard(t) {
   const url = pickTaskUrl(t);
-  const isHigh = (t.priority || '').toLowerCase() === 'high';
+  const p = (t.priority || '').toLowerCase();
+  const priorityCls = (p === 'high' || p === 'medium' || p === 'low') ? `priority-${p}` : '';
   const isDone = (t.status || '').toLowerCase() === 'done';
   const v = versionOf(t);
   const vClass = v === 'v1' ? 'sky' : v === 'v2' ? 'mint' : 'navy';
   return `
-    <a class="task ${isHigh ? 'priority-high' : ''} ${isDone ? 'done' : ''}" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Open in Slack list">
+    <a class="task ${priorityCls} ${isDone ? 'done' : ''}" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Open in Slack list">
       <div class="task-title">${escapeHtml(t.title)}</div>
       <div class="task-meta">
         <span class="tag ${vClass}">${versionLabel(t)}</span>
