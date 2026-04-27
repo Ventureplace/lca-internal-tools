@@ -33,6 +33,7 @@ function countSections(blocks) {
 // Vision" is the real content.
 const HIDE_TABS_BY_TITLE = new Set([
   '💫 Product Vision',
+  '🛣️ Roadmap',
 ]);
 
 let tabs = [];
