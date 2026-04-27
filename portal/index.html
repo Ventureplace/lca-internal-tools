@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Remedy — Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="app-nav"></header>
+
+    <section class="hero fade-up fade-up-1">
+      <p class="eyebrow hero-eyebrow">Project Status · Active</p>
+      <h1 class="hero-title">Project <em>Remedy.</em></h1>
+      <p class="hero-sub" id="hero-sub">A Loblaw Digital × LCA engagement. Designs, board activity, and timeline in one place.</p>
+    </section>
+
+    <section class="section fade-up fade-up-2">
+      <div class="section-head">
+        <p class="eyebrow">Current design tasks</p>
+        <a class="meta" href="board.html">Open the board →</a>
+      </div>
+      <div id="dash-kanban"></div>
+    </section>
+
+    <section class="section fade-up fade-up-3">
+      <div class="section-head">
+        <p class="eyebrow">Design links</p>
+        <a class="meta" href="designs.html">Open in viewer →</a>
+      </div>
+      <div id="dash-designs" class="grid grid-2"></div>
+    </section>
+
+    <section class="section fade-up fade-up-4">
+      <div class="section-head">
+        <p class="eyebrow">Resources</p>
+        <a class="meta" href="resources.html">Open all →</a>
+      </div>
+      <div id="dash-resources" class="grid grid-3"></div>
+    </section>
+
+    <section class="section fade-up fade-up-5">
+      <div class="section-head">
+        <p class="eyebrow">Timeline · Workstreams</p>
+        <a class="meta" href="timeline.html">Open full ledger →</a>
+      </div>
+      <div id="dash-timeline"></div>
+    </section>
+
+    <footer id="app-footer"></footer>
+
+  </div>
+
+  <script type="module" src="js/pages/home.js"></script>
+</body>
+</html>
