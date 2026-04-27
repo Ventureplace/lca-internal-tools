@@ -106,6 +106,157 @@
   background: var(--status-open);
 }
 
+/* ── QUICKNAV — quiet 5-up strip directly under the hero ──
+ *
+ * Lives just below the "21 active · 34 shipped" line, before the kanban.
+ * No dark frame around the strip — it should blend into the page so the
+ * kanban below stays the visual focus. Icons sit on a translucent navy
+ * tint so they read clearly without shouting.
+ */
+
+.home-page .hero { padding: var(--space-5) 0 var(--space-2); }
+.home-page .hero-title { font-size: clamp(34px, 4.5vw, 60px); }
+.home-page .hero-sub { font-size: var(--fs-body); max-width: 520px; }
+.home-page .section { padding: var(--space-3) 0 var(--space-2); }
+.home-page .section + .section { padding-top: var(--space-3); }
+
+.quicknav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.quicknav-tile {
+  display: grid;
+  grid-template-columns: 30px 1fr 10px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.quicknav-tile:hover {
+  background: var(--card);
+  border-color: rgba(31, 34, 58, 0.18);
+  transform: translateY(-1px);
+}
+
+.quicknav-tile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(31, 34, 58, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.quicknav-tile-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--ink-2);
+  stroke-width: 1.5;
+  fill: none;
+  transition: stroke 0.15s ease;
+}
+
+.quicknav-tile:hover .quicknav-tile-icon {
+  background: rgba(31, 34, 58, 0.14);
+}
+
+.quicknav-tile:hover .quicknav-tile-icon svg {
+  stroke: var(--ink);
+}
+
+.quicknav-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.quicknav-tile-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--tr-tight);
+  line-height: 1.2;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quicknav-tile-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quicknav-tile-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--ink-muted);
+  opacity: 0.6;
+  transition: color 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+}
+
+.quicknav-tile-arrow svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.quicknav-tile:hover .quicknav-tile-arrow {
+  opacity: 1;
+  color: var(--coral);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 1000px) {
+  .quicknav { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .quicknav { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── NAV — slightly stronger contrast, sticky on scroll ── */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(242, 239, 236, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin: 0 calc(var(--space-3) * -1);
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.nav-link.active { font-weight: 600; }
+
 /* ── HERO ── */
 
 .hero {
@@ -620,16 +771,23 @@ a.card:hover .card-arrow {
   transform: translateY(-1px);
 }
 
-.task.priority-high::before {
+/* Priority edge stripe — same shape, color follows the priority palette
+ * so the stripe, the dot, and the tag all match. */
+.task.priority-high::before,
+.task.priority-medium::before,
+.task.priority-low::before {
   content: '';
   position: absolute;
   left: 0;
   top: 12px;
   bottom: 12px;
   width: 3px;
-  background: var(--coral);
   border-radius: 0 3px 3px 0;
 }
+
+.task.priority-high::before   { background: var(--coral); }
+.task.priority-medium::before { background: var(--amber-fg); }
+.task.priority-low::before    { background: var(--sky-ink); }
 
 .task-title {
   font-family: var(--font-serif);

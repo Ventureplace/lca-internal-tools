@@ -173,11 +173,21 @@ export function activeTasks(tasks) {
   return tasks.filter(t => !t.completed && (t.status || '').toLowerCase() !== 'done');
 }
 
+/*
+ * Priority colour mapping — single source of truth used by the task tag,
+ * the chip dot, and the left edge of the task card. Drives visual
+ * consistency: a "Medium" tag, dot, and edge stripe should all be the
+ * same amber.
+ *   High   → coral (red)
+ *   Medium → amber (yellow)
+ *   Low    → sky   (blue)
+ *   Unset  → navy  (neutral)
+ */
 export function priorityClass(priority) {
   const p = (priority || '').toLowerCase();
   if (p === 'high') return 'coral';
-  if (p === 'medium') return 'sky';
-  if (p === 'low') return 'navy';
+  if (p === 'medium') return 'amber';
+  if (p === 'low') return 'sky';
   return 'navy';
 }
 
@@ -293,11 +303,22 @@ export const KANBAN_COLUMNS = [
   { id: 'done',     label: 'Complete',    statuses: ['Done'] },
 ];
 
+// Priority sort weight — High first, then Medium, Low, anything else last.
+const PRIORITY_RANK = { high: 0, medium: 1, low: 2 };
+function priorityRank(task) {
+  return PRIORITY_RANK[(task.priority || '').toLowerCase().trim()] ?? 3;
+}
+
 export function bucketKanban(tasks) {
   const buckets = Object.fromEntries(KANBAN_COLUMNS.map(c => [c.id, []]));
   for (const t of tasks) {
     const col = KANBAN_COLUMNS.find(c => c.statuses.some(s => s.toLowerCase() === (t.status || '').toLowerCase()));
     buckets[col ? col.id : 'upnext'].push(t);
+  }
+  // Within each column: priority asc-rank (high → medium → low → unset),
+  // preserving the parser's secondary order (due date) as a tiebreaker.
+  for (const id of Object.keys(buckets)) {
+    buckets[id].sort((a, b) => priorityRank(a) - priorityRank(b));
   }
   return buckets;
 }
