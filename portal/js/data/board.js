@@ -25,6 +25,42 @@ export const SHEET_EDIT_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID
 export const SLACK_LIST_URL = 'https://loblaw.enterprise.slack.com/lists/ERW2CMBNX/F0AAG21270D';
 export const SOURCE_URL = SOURCE === 'local' ? LOCAL_PATH : SHEET_EDIT_URL;
 
+/*
+ * Slack List record IDs — keyed by normalized title.
+ * Lets task cards deep-link to the exact record in the Slack list, e.g.
+ *   https://loblaw.enterprise.slack.com/lists/ERW2CMBNX/F0AAG21270D?record_id=Rec0APQDY3LBY
+ *
+ * Slack does not expose record IDs in the CSV export, so this mapping has
+ * to be filled by hand. To add more: open the Slack list, click a record,
+ * grab the `record_id=Rec...` from the URL, drop a new entry below.
+ */
+const TASK_RECORD_IDS = {
+  'appointment booking - v2 specs': 'Rec0APQDY3LBY',
+};
+
+export function slackRecordUrl(recordId) {
+  return `${SLACK_LIST_URL}?record_id=${encodeURIComponent(recordId)}`;
+}
+
+export function recordIdFor(task) {
+  return TASK_RECORD_IDS[normalizeTitle(task.title)] || null;
+}
+
+/*
+ * Canonical "open this task" URL. Priority order:
+ *   1. Known Slack-list record_id deep link (best — lands on the task itself)
+ *   2. First useful URL extracted from Comments / Description (Slack thread
+ *      → Figma frame → Coda doc → any other)
+ *   3. Slack list root (fallback so the click is never dead)
+ */
+export function taskUrl(task) {
+  const id = recordIdFor(task);
+  if (id) return slackRecordUrl(id);
+  const ex = extractTaskLink(task);
+  if (ex) return ex.url;
+  return SLACK_LIST_URL;
+}
+
 function urlForSource() {
   if (SOURCE === 'local') return LOCAL_PATH;
   return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;

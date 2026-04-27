@@ -10,7 +10,7 @@ import {
   KANBAN_COLUMNS,
   priorityClass,
   scopeClass,
-  extractTaskLink,
+  taskUrl,
   versionOf,
   versionLabel,
   SLACK_LIST_URL,
@@ -21,10 +21,7 @@ function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-function pickTaskUrl(task) {
-  const extracted = extractTaskLink(task);
-  return extracted ? extracted.url : SLACK_LIST_URL;
-}
+const pickTaskUrl = taskUrl;
 
 function priorityOf(task) {
   const p = (task.priority || '').toLowerCase().trim();

@@ -4,16 +4,13 @@
  */
 
 import { renderChrome } from '../chrome.js';
-import { getBoard, extractTaskLink, versionOf, SLACK_LIST_URL } from '../data/board.js';
+import { getBoard, taskUrl, versionOf } from '../data/board.js';
 
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-function pickTaskUrl(task) {
-  const ex = extractTaskLink(task);
-  return ex ? ex.url : SLACK_LIST_URL;
-}
+const pickTaskUrl = taskUrl;
 
 function statusKind(task) {
   const s = (task.status || '').toLowerCase();

@@ -10,11 +10,10 @@ import {
   priorityClass,
   scopeClass,
   bucketKanban,
-  extractTaskLink,
+  taskUrl,
   versionOf,
   versionLabel,
   KANBAN_COLUMNS,
-  SLACK_LIST_URL,
 } from '../data/board.js';
 import { VERSIONS, getVersion } from '../data/figma.js';
 
@@ -95,10 +94,9 @@ function setHeroSub({ tasks }) {
 
 /* ── KANBAN — current design tasks ── */
 
-function pickTaskUrl(task) {
-  const extracted = extractTaskLink(task);
-  return extracted ? extracted.url : SLACK_LIST_URL;
-}
+// Centralised in data/board.js so the Slack record_id deep-link and the
+// extracted-URL fallback chain stays consistent across pages.
+const pickTaskUrl = taskUrl;
 
 function taskCard(t, { compact } = {}) {
   const url = pickTaskUrl(t);
