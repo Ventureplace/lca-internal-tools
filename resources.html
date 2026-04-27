@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Remedy — Resources</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="app-nav"></header>
+
+    <section class="hero fade-up fade-up-1">
+      <p class="eyebrow hero-eyebrow">Resources</p>
+      <h1 class="hero-title">Tools &amp; <em>references.</em></h1>
+      <p class="hero-sub">Product requirements, the Doctronic playground, and the V1 component reference. One place, no hunting.</p>
+    </section>
+
+    <section class="section fade-up fade-up-2">
+      <div class="section-head"><p class="eyebrow">Documents</p></div>
+      <div class="grid grid-fluid">
+
+        <a class="card accented" href="https://docs.google.com/document/d/1HdfdZtL0KOb18bckkjuoeCI2cCYwgHTrs_-keUR7B3k/edit" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+            </div>
+            <span class="tag coral">PRD · Live</span>
+          </div>
+          <div>
+            <h2 class="card-title">Remedy Product Requirements</h2>
+            <p class="card-desc">The canonical Google Doc the team edits in real time. Product Vision, Roadmap, Release Plan, and every workstream PRD live here.</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-url">docs.google.com/document/…</span>
+            <div class="card-arrow">
+              <svg viewBox="0 0 12 12"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="section fade-up fade-up-3">
+      <div class="section-head"><p class="eyebrow">Tools</p></div>
+      <div class="grid grid-fluid">
+
+        <a class="card" href="https://doctronic-playground-fe-nextjs.vercel.app/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-icon neutral">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <span class="tag navy">Dev</span>
+          </div>
+          <div>
+            <h2 class="card-title">Doctronic Playground</h2>
+            <p class="card-desc">Interactive environment for testing Doctronic chat behaviour and triage prototypes.</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-url">doctronic-playground-fe-nextjs.vercel.app</span>
+            <div class="card-arrow">
+              <svg viewBox="0 0 12 12"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <a class="card" href="https://lca-devhandoff.figma.site/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-icon neutral">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><circle cx="17" cy="17" r="4"/></svg>
+            </div>
+            <span class="tag navy">Design</span>
+          </div>
+          <div>
+            <h2 class="card-title">V1 Components</h2>
+            <p class="card-desc">Design-to-development handoff specs for the V1 component library — tokens, anatomy, and code references.</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-url">lca-devhandoff.figma.site</span>
+            <div class="card-arrow">
+              <svg viewBox="0 0 12 12"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="section fade-up fade-up-4">
+      <div class="section-head"><p class="eyebrow">Presentations</p></div>
+      <div class="empty-state">We'll drop deck links here as we present.</div>
+    </section>
+
+    <footer id="app-footer"></footer>
+
+  </div>
+
+  <script type="module">
+    import { renderChrome } from './js/chrome.js';
+    renderChrome({ active: 'resources' });
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Remedy — Timeline</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="app-nav"></header>
+
+    <section class="hero fade-up fade-up-1">
+      <p class="eyebrow hero-eyebrow">Timeline · Design Review Ledger</p>
+      <h1 class="hero-title">Workstreams &amp; <em>weeks.</em></h1>
+      <p class="hero-sub">High-level progress across every Remedy design workstream. Bars colored by current Slack status. Click any task to open its source.</p>
+    </section>
+
+    <section class="section fade-up fade-up-2">
+      <div id="timeline-ledger"></div>
+    </section>
+
+    <footer id="app-footer"></footer>
+
+  </div>
+
+  <script type="module" src="js/pages/timeline.js"></script>
+</body>
+</html>

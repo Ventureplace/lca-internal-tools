@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Remedy — Requirements</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="app-nav"></header>
+
+    <section class="hero fade-up fade-up-1">
+      <p class="eyebrow hero-eyebrow">Product Requirements</p>
+      <h1 class="hero-title">Remedy <em>PRD.</em></h1>
+      <p class="hero-sub">Canonical product requirements for Project Remedy. Live document below — every tab is mirrored from the Google Doc the team works from daily.</p>
+    </section>
+
+    <section class="section fade-up fade-up-2">
+      <div class="prd-cta">
+        <div>
+          <p class="prd-cta-eyebrow">Source of truth</p>
+          <p class="prd-cta-title">Open the live <em>Google Doc</em></p>
+        </div>
+        <div class="prd-cta-actions">
+          <a class="btn solid" href="https://docs.google.com/document/d/1HdfdZtL0KOb18bckkjuoeCI2cCYwgHTrs_-keUR7B3k/edit" target="_blank" rel="noopener">
+            Open in Docs
+            <svg viewBox="0 0 12 12"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+          </a>
+          <a class="btn outline" href="docs/Remedy-Product-Requirements.docx" download>
+            Download .docx
+          </a>
+        </div>
+      </div>
+
+      <div class="prd-layout">
+        <aside class="prd-rail" id="prd-rail">
+          <span class="prd-rail-label">Tabs</span>
+        </aside>
+        <article class="prd-content" id="prd-content">
+          <div class="empty-state">Loading PRD…</div>
+        </article>
+      </div>
+    </section>
+
+    <footer id="app-footer"></footer>
+
+  </div>
+
+  <script type="module" src="js/pages/requirements.js"></script>
+</body>
+</html>

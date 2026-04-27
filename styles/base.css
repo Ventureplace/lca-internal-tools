@@ -1,0 +1,178 @@
+/*
+ * Base — reset, typography defaults, layout primitives, animations.
+ * Applies the RDS tokens from tokens.css.
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light only;
+}
+
+body {
+  background: var(--bg-warm);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  min-height: 100vh;
+  padding: 0 var(--space-3) var(--space-8);
+}
+
+/* ── TYPE ── */
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: var(--tr-tight);
+  line-height: var(--lh-heading);
+}
+
+h1 { font-size: var(--fs-h1); letter-spacing: var(--tr-h1); }
+h2 { font-size: var(--fs-h2); letter-spacing: var(--tr-h2); }
+h3 { font-size: var(--fs-h3); }
+
+/* RDS signature: <em> inside a heading → italic + coral */
+h1 em, h2 em, h3 em, .display em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral);
+}
+
+p {
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover { color: var(--coral); }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  letter-spacing: var(--tr-display);
+  line-height: var(--lh-display);
+  color: var(--ink);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tr-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.muted { color: var(--ink-muted); }
+
+/* ── LAYOUT PRIMITIVES ── */
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-fluid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+.section {
+  padding: var(--space-5) 0 var(--space-3);
+}
+
+.section + .section {
+  padding-top: var(--space-4);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  gap: var(--space-2);
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: var(--space-3) 0;
+}
+
+/* ── ANIMATIONS ── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.fade-up-1 { animation-delay: 0.05s; }
+.fade-up-2 { animation-delay: 0.12s; }
+.fade-up-3 { animation-delay: 0.20s; }
+.fade-up-4 { animation-delay: 0.28s; }
+.fade-up-5 { animation-delay: 0.36s; }
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 720px) {
+  body { padding: 0 var(--space-2) var(--space-6); }
+  .grid-2, .grid-3, .grid-fluid { grid-template-columns: 1fr; }
+  .section { padding: var(--space-4) 0 var(--space-2); }
+  :root {
+    --fs-display: 44px;
+    --fs-h1: 30px;
+    --fs-h2: 24px;
+    --fs-h3: 20px;
+  }
+}

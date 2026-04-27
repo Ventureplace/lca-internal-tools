@@ -1,0 +1,123 @@
+/*
+ * RDS — Remedy Deck Design System (UI-derived)
+ *
+ * Token source of truth: latecheckout/Client-Deliverables/loblaws/design-review-4-29/colors_and_type.css
+ * The deck file is sized for 1920×1080 slides; this file preserves color/spacing/radius/shadow
+ * tokens verbatim and adds a UI-scaled type ramp (~÷3 of the deck scale).
+ *
+ * Naming intentionally matches the deck so anyone who knows RDS can navigate.
+ */
+
+:root {
+  /* ── BASES ── */
+  --bg-warm: #F2EFEC;
+  --bg-cool: #E8ECF2;
+  --bg-blush: #F0E5E2;
+
+  /* ── INKS (navy-shifted, never pure black) ── */
+  --ink: #1F223A;
+  --ink-2: #3D405B;
+  --ink-muted: #6B6E80;
+
+  /* ── HAIRLINES ── */
+  --line: rgba(31, 34, 58, 0.10);
+  --line-soft: rgba(31, 34, 58, 0.06);
+
+  /* ── SURFACES ── */
+  --card: #FFFFFF;
+  --card-warm: #FFF8F7;
+  --card-cool: #F4F7FB;
+
+  /* ── BRAND ACCENT (single pop color — coral) ── */
+  --coral: #C8413C;
+  --coral-soft: #E8C5C2;
+  --coral-wash: rgba(200, 65, 60, 0.08);
+  --coral-tint: rgba(200, 65, 60, 0.12);
+
+  /* ── TINTS (tags only) ── */
+  --mint: #B8D4C2;
+  --mint-ink: #335343;
+  --mint-tint: rgba(145, 180, 155, 0.22);
+  --sky: #C9D7E4;
+  --sky-ink: #2C4661;
+  --sky-tint: rgba(140, 170, 200, 0.22);
+  --sand: #E5D9C7;
+
+  /* ── ALIASES (RDS-compatible) ── */
+  --fg1: var(--ink);
+  --fg2: var(--ink-2);
+  --fg3: var(--ink-muted);
+  --bg1: var(--bg-warm);
+  --bg2: var(--card);
+  --accent: var(--coral);
+  --border: var(--line);
+  --divider: var(--line-soft);
+
+  /* ── STATUS (inline RDS pattern) ── */
+  --amber-bg: rgba(210, 150, 60, 0.16);
+  --amber-fg: #8A5A1A;
+  --status-open: #4CAF50;
+
+  /* ── RADII ── */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 24px;
+  --r-xl: 28px;
+  --r-2xl: 40px;
+  --r-pill: 999px;
+
+  /* ── SHADOWS (navy-tinted) ── */
+  --shadow-card: 0 1px 0 rgba(31, 34, 58, 0.04), 0 30px 60px -30px rgba(31, 34, 58, 0.18);
+  --shadow-card-sm: 0 1px 0 rgba(31, 34, 58, 0.03), 0 12px 24px -12px rgba(31, 34, 58, 0.14);
+  --shadow-phone: 0 40px 70px -20px rgba(31, 34, 58, 0.35);
+  --shadow-hero: 0 50px 90px -20px rgba(31, 34, 58, 0.40);
+  --shadow-inset-hi: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+
+  /* ── SPACING (deck-native, kept as px) ── */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 56px;
+  --space-7: 72px;
+  --space-8: 100px;
+
+  /* ── FAMILIES ──
+   * SF Pro Text is the brand UI sans but its EULA is restrictive for customer-facing
+   * web distribution. Falling back to the native system stack — matches SF Pro on
+   * Apple devices, native on Windows, zero load cost. Revisit if licensing changes.
+   */
+  --font-display: 'Instrument Serif', 'Newsreader', Georgia, serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ── TYPE RAMP (UI-scaled, ~÷3 of deck) ── */
+  --fs-display: 64px;
+  --fs-h1: 36px;
+  --fs-h2: 28px;
+  --fs-h3: 22px;
+  --fs-body-lg: 17px;
+  --fs-body: 15px;
+  --fs-meta: 13px;
+  --fs-eyebrow: 11px;
+  --fs-micro: 10px;
+
+  /* ── TRACKING ── */
+  --tr-display: -0.03em;
+  --tr-h1: -0.02em;
+  --tr-h2: -0.01em;
+  --tr-tight: -0.01em;
+  --tr-mono: 0.06em;
+  --tr-eyebrow: 0.08em;
+  --tr-section: 0.10em;
+
+  /* ── LEADING ── */
+  --lh-display: 0.95;
+  --lh-tight: 1.0;
+  --lh-heading: 1.15;
+  --lh-body: 1.5;
+  --lh-prose: 1.6;
+}

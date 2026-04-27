@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Remedy — Designs</title>
+  <link rel="icon" type="image/x-icon" href="lca.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="app-nav"></header>
+
+    <section class="hero fade-up fade-up-1">
+      <p class="eyebrow hero-eyebrow">Designs</p>
+      <h1 class="hero-title">Shared Figma <em>files.</em></h1>
+      <p class="hero-sub">Loblaw Digital design files for V1 (internal pilot) and V2 (GA release). Embed below, or jump straight to a specific frame.</p>
+    </section>
+
+    <section class="section fade-up fade-up-2">
+      <div class="row-between" style="margin-bottom: var(--space-3);">
+        <div id="designs-segmented" class="segmented" role="tablist"></div>
+        <a id="designs-open" class="btn outline" target="_blank" rel="noopener">
+          Open in Figma
+          <svg viewBox="0 0 12 12"><line x1="2" y1="10" x2="10" y2="2"/><polyline points="4,2 10,2 10,8"/></svg>
+        </a>
+      </div>
+
+      <div class="grid" style="grid-template-columns: minmax(260px, 320px) 1fr; align-items: start;" id="designs-layout">
+        <aside id="designs-sidebar" class="card"></aside>
+        <div id="designs-frame" class="frame"></div>
+      </div>
+    </section>
+
+    <footer id="app-footer"></footer>
+
+  </div>
+
+  <style>
+    @media (max-width: 860px) {
+      #designs-layout { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+  <script type="module" src="js/pages/designs.js"></script>
+</body>
+</html>

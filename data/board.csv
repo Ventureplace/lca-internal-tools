@@ -1,0 +1,738 @@
+Request,Priority,"Submitted by",Comments,Assignee,Status,Completed,"Due Date",Description,Attachments,"Loblaw PM Owner",Scope,"Design effort",State
+"SLT Presentation Screens (Designs)",High,U08TNKBEB7W,Figma,U09BS66S47M,Done,true,2026-01-26,"Complete screens for the E2E flow of the following:
+• NUX
+• User going through the 6th golden set
+• Showcasing personalization/use of medication context
+• Returning user
+",,"U0A93SM3BPE, U0A8JDEKLJ2","Deck support",L,
+"Incognito/Profile Switch mode/Caregiver mode",High,U0A8JDEKLJ2,"• Inline profile selector
+• Nested profile selector
+Some design decisions:
+1. Prevent user from changing profile mid chat. It will almost certainly lead to model confusion
+2. Use more text in the button (i.e. ""Ask as..."") to make it clear what the profile is without clicking on it
+3. Anonymous hidden behind profile as default
+also added this video to answer anjana's feedback",U09BS66S47M,"In progress",false,,"*Caregiver / “Chat for Someone Else” Experience — Requirements*
+1. *Entry Point in Core Chat*
+    a. Add a visible option in Remedy chat UI: _“Chat for someone else”_ (toggle / CTA).
+2. *Profile Mode Switch*
+    a. Enable users to switch between:
+    b. “Me” (default)
+    c. “Someone else” (caregiver/incognito mode)
+3. *Lightweight Profile Creation (On First Use)*
+    a. When “someone else” is selected, prompt for minimal inputs:
+    b. Age (required)
+    c. Gender (optional/free-form)
+    d. Relationship (optional, e.g., child, parent)
+4. *No Pre-existing Account Requirement*
+    a. Do not require a saved or registered user profile.
+    b. Create a *temporary session-based profile* on first query.
+5. *Dynamic Disambiguation by Doctronic*
+    a. Ensure Doctronic can:
+    b. Accept incomplete inputs
+    c. Ask follow-up questions to refine context (age, symptoms, etc.)
+6. *Context Isolation*
+    a. Clearly separate conversations:
+    b. “Me” vs “Someone else” contexts must not mix data or history.
+7. *UI State Visibility*
+    a. Persist and display active mode in chat header (e.g., “Chatting for: Child, Age 5”).
+8. *Session Persistence (Optional v1)*
+    a. Decide:
+    b. v1: Session-only (resets on exit)
+    c. v2: Option to save named profiles
+9. *Fallback Handling (If Not Supported by Doctronic)*
+    a. If Doctronic cannot support dynamic profiles:
+    b. Implement preprocessing layer to structure input before sending
+10. *Experience Prototype (This Week)*
+    a. Deliver a clickable draft covering:
+    b. Mode switch interaction
+    c. First-time profile capture
+    d. Chat flow with contextual labeling",,U0A8JDEKLJ2,,,
+"Doctronic Co-Branding",Medium,U08TNKBEB7W,"<@U0A8JDEKLJ2> this is ready for review
+
+Link here",U0AF7NL95PY,Done,true,,"*Description*
+Design lightweight co-branding options to fulfill legal requirement for Doctronic logo inclusion in MVP. Doctronic powers our triage flows specifically, so co-branding should be contextually appropriate rather than prominent throughout the entire experience.
+
+*Requirements*
+• Legal agreement requires Doctronic logo/branding inclusion
+• Must be ""lighter weight"" approach vs. Doctronic's initial suggestions
+• Only associate with triage flows (not all Remedy functionality is Doctronic-powered)
+• Explore ""powered by"" format on entry screens as recommended by Erin",,U0A8JDEKLJ2,v1.1,S,
+"Personal Health Record",Low,U0A93SM3BPE,,U0AF7NL95PY,Done,true,,"*Description*
+Design the conversational experience for users accessing and updating their personal health records through Remedy. Explore how health history, lab results, immunizations, and medical notes can be surfaced contextually during health conversations and how users can contribute new information back to their records.
+Consider scenarios like users asking ""what were my cholesterol levels last year?"" or wanting to log new symptoms or medication side effects. Design the UI patterns for displaying historical health data in chat format, data input methods for updating records, and privacy/consent considerations for PHR access.
+Work with Mackenzie Pinch to understand technical constraints, data sources, and user priorities for health record integration.
+
+*Design Deliverables*
+• User journey maps for PHR access scenarios
+• UI patterns for displaying health record data in conversational format
+• Input methods for updating/adding health information
+• Privacy and consent flow designs for PHR access levels",,U0A9ESVU0KS,"Long-term Discovery",M,
+"WCAG 2.0 AA Accessibility Audit",High,U08TNKBEB7W,,U0A7RFFSHK9,Done,true,2026-03-13,"Conduct comprehensive accessibility audit of Remedy MVP components to ensure WCAG 2.0 AA compliance and AODA (Accessibility for Ontarians with Disabilities Act) requirements. Create visual documentation showing current accessibility failures alongside proposed fixes to guide engineering implementation.
+
+*Audit Focus Areas*
+• Touch targets - minimum 44px tap areas, adequate spacing
+• Color contrast - text/background ratios meeting AA standards
+• Typography - font sizes, line heights, readability
+• Visual accessibility patterns and component states
+
+
+*Deliverables*
+1. Split-view documentation showing failures vs. fixes for each component
+2. Accessibility failure inventory with specific WCAG criteria violations
+3. Remediation recommendations with design solutions for each issue",,,v1.1,M,
+"Prescription Management",,U0A93SM3BPE,,U0AF7NL95PY,Backlog,false,,"Design the prescription management experience that allows users to view, refill, transfer, and track their medications through conversational interactions with Remedy. Explore how prescription data enhances medication guidance conversations and how users can take prescription-related actions directly from chat.
+Consider scenarios like ""when is my refill due?"", ""transfer my prescription to a different pharmacy"", or ""what are the side effects of my current medications?"". Design UI patterns for displaying prescription details, refill workflows, pharmacy selection, and prescription history tracking. Address how DRx management connects to existing medication guidance features planned for the roadmap.
+Work with Mackenzie Pinch and Sidharth Sreekumar to understand pharmacy integration capabilities, prescription data access, and regulatory requirements for digital prescription management.
+
+*Design Deliverables*
+• Prescription management user journey flows
+• UI components for prescription details and actions
+• Pharmacy selection and transfer workflows
+• Integration patterns with medication guidance conversations
+",,"U0A9P5FFR4H, U0A8G746FQQ","Long-term Discovery",,
+"Appointment Booking",,U0A93SM3BPE,,U0AF7NL95PY,Done,true,,"Design the end-to-end appointment booking experience within Remedy's conversational interface. Explore how users move from health guidance conversations to actually scheduling care with appropriate providers. Consider integration with existing appointment systems and how to present provider options, availability, and booking confirmation.
+Design scenarios where Remedy suggests ""you should see a doctor"" and seamlessly transitions users into appointment booking, including provider selection (family doctor, specialist, walk-in clinic), appointment type preferences (virtual vs in-person), and scheduling logistics. Address how appointment reminders and management fit into the ongoing health conversation.
+
+*Design Deliverables*
+• Conversational appointment booking user flows
+• Provider selection and filtering UI components
+• Appointment confirmation and management interfaces
+• Integration touchpoints with existing booking systems
+",,"U0A9P5FFR4H, U0A9ESVU0KS","Long-term Discovery",,
+"Personalization & Transparency 1.1 GA release (May 1)",High,U08TNKBEB7W,,U09BS66S47M,Done,true,,"Design the full personalization and transparency experience required for V1.1 GA release (May 1st). The MVP version was minimized to chat history, health profile, and prescriptions only, but we have identified enhanced transparency features as non-negotiable for the public Ontario launch.
+
+We need to design the complete ""full data sources screen"" that represents the end-state vision extracted from MVP scope. This includes comprehensive user toggle controls by data stream so users can manage what personal information is used to personalize their Remedy experience. The Sources component must also be enhanced beyond the basic MVP version, with no micro-concessions allowed on removal per v1.1 GA requirements.
+
+The design should show users exactly what data sources are being used to generate their responses, provide granular control over personalization settings, and create full transparency into how their health information contributes to the AI recommendations.
+
+*Deliverables*
+• Full data sources transparency screen design
+• Enhanced user toggle controls for personalization data streams
+• Expanded Sources component integration across response types
+• Clear data usage visibility throughout the experience",,,v1.1,,Duplicate
+"E2E flow for GA Release (v1.1 May 1)",High,U08TNKBEB7W,,U09BS66S47M,Done,true,2026-03-13,"Map out comprehensive end-to-end user flows for V1.1 GA release (May 1st Ontario launch) to identify gaps, required components, and spec changes needed beyond V1.0 internal pilot. Create storyboard documentation to support Friday demo and engineering planning.
+
+*Context*
+• V1.0: Internal pilot release (April 1) - 100 internal users
+• V1.1: Ontario GA release (May 1) - live to real Ontario users
+
+*Deliverables*
+
+1. Storyboard mapping of complete V2.0 user journeys (due Tuesday)
+2. End-to-end flow documentation covering all user paths from entry to completion
+3. Demo-ready prototype flows for Friday presentation
+
+
+*Key Focus Areas*
+• Navigation user flow refinements
+• Personalization and transparency spec changes required
+• Enhanced user experience elements for public launch vs internal pilot
+• Component inventory - what's missing for full GA experience",,,v1.1,L,
+"Store location page refinements",Medium,U08TNKBEB7W,,U09BS66S47M,Done,true,,"*Goal:*
+• Ensure each SDM/LCL store detail page can show additional services, with the most relevant services surfaced near the top of the page.
+*Scope / Requirements:*
+• Add a ""Detailed services"" section to the store location detail page.
+• For SDM/LCL locations, show additional services available at that location.
+• Surface contextually relevant services near the top (e.g., services that are highly used or relevant to the user’s current task/journey).
+*Dependencies / Open Questions for Tech:*
+• Confirm data source for store-level services:
+• Which internal system is the source of truth?
+• Which APIs will be used, and are they ready/usable for May 1?
+Define fallback behavior:
+What do we show if a location has incomplete or no service data?
+Performance considerations:
+• Any caching or prefetching needed so store pages load quickly with services?
+Deliverables:
+Finalized UX/UI designs for the detailed services section on the store location page.
+• Clear specs for tech on data requirements (fields, states, error/empty states).",,U0A9P5FFR4H,v1.1,S,
+"GA release visual identity overview",High,U08TNKBEB7W,,U09BS66S47M,Done,true,,"Create visual facelift for May 1st GA launch addressing navigation specs feedback. Standardize language across different design approaches and incorporate V1.5 vision elements.
+
+*Design Requirements/Cases to Consider:*
+• Standardize language and visual approaches across all releases and components
+• Incorporate View 1.5 vision elements where appropriate
+• Ensure design supports both SDM and PC Health app contexts",,,v1.1,L,
+"GA Release Action cards (v2)",,U08TNKBEB7W,,U09BS66S47M,Prioritized,false,,"Design action card components for care navigation CTAs including both internal deep links and external resources.
+
+Scope: need specs
+• How do we surface more than 1 at a time?
+• Iconography limitation (how do we choose which one to display)
+*Design Requirements/Cases to Consider:*
+• Care navigation CTAs with internal app deep links
+• External resource links and references
+• Distinguish visually from contextual conversation chips (backend-generated follow-up questions)
+• Map against Sid's CTA list for comprehensive coverage
+• Support pharmacy finder, appointment booking, and care escalation flows
+
+Clear action affordances
+• Phone → tap to call
+• URL → handled to be gracefully displayed → tap to open
+• Email → tap to compose
+• Address → map
+Visual consistency
+• Actionable entities are visually distinct from regular text.
+• Avoid clutter when multiple entities appear in one response.
+Emergency handling
+• Emergency numbers visually differentiated from standard numbers.",,,v1.1,,
+"Detailed thinking state",High,U09BS66S47M,,U09BS66S47M,Done,true,,"Create specs for the thinking state when Remedy takes longer than 2-3 seconds to provide an answer.
+
+We should provide a PoV on how we can deliver the thinking state in a phased approach (v1 vs v2)",,,,S,Duplicate
+"Conversation History - V1.1",Medium,U08TNKBEB7W,,U0AF7NL95PY,Done,true,,,,,,,
+"Figma File Reorganization",,U08TNKBEB7W,"Figma file reorg:
+• walkthrough",U09BS66S47M,Done,true,,,,,,,
+"Proactive AI Assistant",,U08TNKBEB7W,,,Backlog,false,,"Current Remedy is purely reactive - users must initiate all conversations. A proactive assistant could build ongoing relationships by following up on previous conversations, suggesting preventive care, and proactively surfacing relevant health guidance based on user context and health profile.
+This transforms Remedy from a search tool into a health companion that actively supports users' ongoing wellness journey, increasing engagement and health outcomes.
+
+*Design Requirements / Cases to Consider*
+• Follow-up conversation triggers based on previous health discussions
+• Proactive health reminders and preventive care suggestions
+• Notification system design for health check-ins and follow-ups and the ability to opt out
+• User control over proactivity levels (frequency, types of outreach)
+• Proactive content personalization based on health profile and conversation history
+",,,"Long-term Discovery",,
+"Chat deletion",,U08TNKBEB7W,,U0AF7NL95PY,Done,true,,,,,,,
+"Onboarding V2",,U08TNKBEB7W,,"U0AD6D01N4D, U0929BQGD5H","In progress",false,,,,U0A8JDEKLJ2,,,
+"Appointment Booking - V2 specs",,U08TNKBEB7W,"Feedback to Address from First Review 4/23
+1. The reservation capability for 20 mins, we could say 5 minutes since it is enough time to fill the form and get feedback. 
+2. The answer yes to the screening questions to show other questions. 
+3. Adding the option of ""I do not have a health card"" for the user to select.
+4. Reviewing the experience on how to best manage the screening questions which could range from 7 to 16 questions. Today the experience allows the user select No at the top and pretty much by pass even glancing at the questions.",U0AF7NL95PY,"In progress",false,,,,"U0A96QM0XQD, U0A9P5FFR4H, US1KGJBJN, U097HB6SHNE",,,
+"PHR - V2 specs",,U08TNKBEB7W,,U0AF7NL95PY,"Design Specs",false,,,,,,,
+"Record Retrieval",,U08TNKBEB7W,,U0AF7NL95PY,Done,true,,,,,,,
+"April 14th presentation slides",,U08TNKBEB7W,,U09BS66S47M,Done,true,,,,,,,
+"Triage ""long"" summary from Doctronic",Medium,U08TNKBEB7W,,U0AD6D01N4D,Prioritized,false,,https://late-checkout.slack.com/archives/C0AARQGD8N8/p1776098765048259,,U0A9ESVU0KS,,,
+"Memory - Change, Remove, Delete",,U09BS66S47M,,,Backlog,false,,,,,,,
+"User testing - Personalization",,U09BS66S47M,,,Backlog,false,,,,,,,
+"Visual styling for V1",,U08TNKBEB7W,,U09BS66S47M,"In Product Review",false,,,,,,,
+,,U0A8JDEKLJ2,,,Backlog,false,,,,,,,
+"Conversation End Handling",High,U0A8JDEKLJ2,"<@U04MK7C1H26> - added details + requirements
+<@U08TNKBEB7W> - can you please take a look?",U04MK7C1H26,Backlog,false,,"When Remedy detects a red flag scenario (self-harm, violence, medical emergency, etc), the backend ends the conversation and surfaces a safety response with crisis resources. We need UX specs for how this end state looks and behaves.
+
+
+_1. Hard end message treatment_
+• Visually distinct from normal assistant messages (banner/icon/color) so user registers it as escalation
+• Serious tone without being alarming for someone in crisis
+_2. CTA presentation_
+• Crisis resources (911, 988, Poison Control, ConnexOntario, etc.) come from backend as structured links
+• How do phone / SMS / URL CTAs render — buttons, link list, or grouped card?
+• Tap targets sized for stress states (one-handed, shaky hands)
+_3. Disabled composer state_
+• Input + send disabled after hard end
+• Helper text copy below composer
+• Greyed out, hidden, or replaced?
+_4. Recovery affordance_
+• ""Start a new conversation"" entry point
+• Placement: inline below message, sticky bottom, or both?
+• Button styling + copy
+_5. Conversation history treatment_
+• Marker for hard-ended threads in history list (icon/label/color)
+• Read-only state when reopened: CTAs tappable, composer disabled
+_6. Edge states_
+• Hard end arrives mid-stream while normal response is rendering
+• App backgrounded then reopened after hard end
+• Network failure during hard end render",,,v1.0,,
+"v1 Starting Prompt Chips",Medium,U0929BQGD5H,,U0AD6D01N4D,"In progress",false,2026-04-28,"Team is requesting copy updates to the starting prompt chips, see attached doc and then please mockup examples and a default starting screen with new chips
+
+https://docs.google.com/document/d/1EUzkLyqxP9SGvNe6KV8FiBLBam1GW-YfgjAuTKHZw0Y/edit?usp=sharing",,mbock@Shoppersdrugmart.ca,,,
+Onboarding,,U09BS66S47M,,,Done,true,,,,,"Long-term Discovery",,Duplicate
+"Voice & Multimodal Input",,U08TNKBEB7W,,,Backlog,false,,"Users often struggle to describe symptoms, medication names, or health concerns through typing alone. Voice input combined with image sharing would enable more natural, comprehensive health conversations and better support for users with accessibility needs or complex descriptions.
+
+*Design Requirements / Cases to Consider*
+• Voice-to-text integration
+• Voice input UI patterns (press-and-hold vs. toggle recording)
+• Combination flows: voice description + image of symptoms/medications
+• Error handling for unclear audio or failed voice recognition
+• Conversation flow integration - how voice inputs appear in chat history
+",,,"Long-term Discovery",,
+"[MVP][Mobile] Clear MVP Entry Point",Medium,U08TNKBEB7W,"Link to designs",,Done,true,,"Define and finalize MVP entry point for Remedy on mobile
+
+*Description*
+Users currently lack a predictable, prominent way to discover and launch Remedy inside the SDM and PCH apps. For MVP, we need to finalize a single, clear entry point that is clear for users, is consistent across apps, and unblocks engineering implementation for MVP.
+Note: This work is focused on the MVP placement only. Longer-term entry point concepts (e.g., Discover, search repurposing) are explicitly out of scope for this ticket and can be tackled in the longer-term design task ticket!
+
+
+*Design requirements / cases to consider*
+• First-time user discovery vs returning user re-entry
+• Consistency across SDM and PCH app surfaces
+• Visual prominence without overwhelming the primary app experience
+• How the entry point behaves once a user has active or past conversations
+• Accessibility and clarity of labeling (what is Remedy, what happens when tapped)
+• Future scalability (ability to evolve placement post-MVP without redesigning everything)",,U0A8JDEKLJ2,v1.0,XL,
+"Explain intents additional components",High,U08TNKBEB7W,"Figma link",U0A7RFFSHK9,Done,true,,"*Goal*
+Design 4 additional components for the Explain intent that will help make the experience truly differentiated from other chat-based AI tools (ex ChatGPT)
+
+*Context*
+We started work on the explain intent components and tackled the critical pieces first (ex: summary component, hyperlinks, etc). The goal with this ticket is to go beyond “walls of text” and show how we can make an impact on the experience using more thoughtful chat UI
+
+*What needs to be designed*
+• Comparison lists
+• Expandable definitions
+• Text component
+• Layered explanations
+*Output*
+Explain components and example end-to-end flows.
+
+Figma link",,U0A8JDEKLJ2,v1.1,M,
+"[MVP] User Journey Set E2E flows",High,U08TNKBEB7W,"<@U0A8JDEKLJ2> Refactored this ticket to be a prototype of the doctronic system that will be available at launch only. there's a separate ticket for a post-mvp prototype that has been de prioritized (in the parking lot
+
+full proto lives here: https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy-MVP?node-id=3706-158744&t=PgDTbLiZXMxYiOlR-11",U09BS66S47M,Done,true,2026-02-20,,,U0A8JDEKLJ2,v1.0,L,
+"Consent & permission flows",High,U08TNKBEB7W,Figma,U0A7RFFSHK9,Done,true,,"• Consent flows (how users accept content + privacy policies)
+    ◦ If no personalization consent has been given yet, ask for it
+• Usage disclosure MUST be accepted/continue
+• PCC consent is optional and allows users to consent Loblaw to use medication data to personalize their experience
+• Design the flow for location permissions and any other permissions that are required in this experience
+Additional resources:
+• Miro flow of consent flows (see attached photo)
+• Usage Disclosure draft
+• Figma of current PCC screens",F0ADUE93K2A,U0A8JDEKLJ2,v1.0,M,
+"Explain Intent – Component Design",High,U08TNKBEB7W,"link to figma section is here",U09BS66S47M,Done,true,,"*Goal*
+Design how Remedy explains health topics in a way that is clear, credible, and appropriately scoped.
+
+*Context*
+Explain responses are often the first interaction users have. They must feel authoritative without pretending to diagnose or prescribe.
+
+*What needs to be designed*
+Design explain responses using the core response structure, including optional “when to seek care” guidance and source visibility. Ensure tone is informative, not alarmist.
+
+*Output*
+Explain components and example end-to-end flows.",,U0A8JDEKLJ2,v1.0,S,
+"Navigation / Care Routing Intent",High,U08TNKBEB7W,"Link to Designs:
+• Figma section
+• Video walkthrough
+Update:
+MVP scope TBD - most likely we will be updating the designs to simplify scope for MVP. <@U0A8JDEKLJ2> to send update on Thursday 26th feb
+
+
+---
+
+<@U0A9P5FFR4H> closing and moving to done, now that we have our refinement ticket",U0AF7NL95PY,Done,true,,"*Goal*
+Help users understand where to go in the Canadian healthcare system and when.
+
+*Context*
+A major Remedy differentiator is turning confusion into direction. Navigation responses must be actionable and localized.
+
+*What needs to be designed*
+Design navigation responses that present ranked care options, timeframes, and clear reasoning. Include CTAs for workflows where applicable.
+
+*Output*
+Navigation flows and reusable resource list components.
+
+*Navigation PRD:*  https://coda.io/d/Digital-Health_dm2IMuVAYhm/Navigation_suRdqE94#_luz7HI-E",,U0A9P5FFR4H,v1.0,L,Blocked
+"Sources & Verifiability UX",High,U08TNKBEB7W,"Figma file ",U09BS66S47M,Done,true,,"*Goal*
+Make sources visible and understandable without overwhelming users.
+
+*Context*
+Trust depends on verifiability. Users should know where information comes from and its limitations.
+
+*What needs to be designed*
+Design citation display patterns, expandable source details, and limitation messaging that fits naturally into responses.
+
+*Output*
+Source components and usage guidelines.",,U0A8JDEKLJ2,v1.0,M,
+"Batched vs Streaming responses",High,U08TNKBEB7W,"Decision documented here",U08TNKBEB7W,Done,true,,"Run a product investigation to validate whether the Remedy MVP UI can support streaming responses that include structured components. This work will assess FE/BE feasibility, rendering behaviour, and technical constraints associated with dynamically creating and updating components (e.g. banners, text blocks, citations) during a streamed response.
+
+The goal is to de-risk the rendering strategy by confirming that the interface can correctly interpret section markers, maintain component ordering, and handle progressive content updates without layout instability or UX regressions.
+
+*Outcome*
+ • Clear feasibility assessment
+ • Identified technical risks / constraints
+ • Recommendation on MVP readiness",,U0A8JDEKLJ2,v1.0,,
+"Chat History Access",Medium,U08TNKBEB7W,"Figma: History Section",U0A7RFFSHK9,Done,true,,"Design chat history access for Remedy conversations
+
+*Description*
+Users currently cannot reliably find or return to past Remedy conversations, which breaks continuity and trust. We need an obvious, low-friction way for users to view and resume previous chats across both apps.
+This experience should reinforce that Remedy conversations persist over time and that users can safely come back to them.
+
+*Design requirements / cases to consider*
+• Entry point to history (where it lives and how users find it)
+• Empty state vs populated history
+• Resuming a previous conversation vs starting a new one
+• Managing history (e.g., view, delete, clear) without over-complication
+• Cross-app consistency (SDM vs PCH)
+• How history behaves alongside personalization and context reuse
+Figma location
+Specs",,U0A8JDEKLJ2,v1.0,M,
+"Triage Intent UI (Urgent vs Non-Urgent)",,U08TNKBEB7W,"<@U0A8JDEKLJ2>
+Here are a few scenarios mapped out for the Triage UI intent using the current Doctronic experience. I’ve also included the ideal experience we should be aiming for in the MVP.
+
+Link
+
+I’ve added notes under some screens where the current flow doesn’t feel aligned with the intended triage behaviour.
+Could you please review and let us know whether the experience looks appropriate, or if any UI adjustments are needed",U0AF7NL95PY,Done,true,,"Design triage UI for urgent and non-urgent health scenarios
+
+*Description*
+Triage responses must clearly communicate urgency and recommended next steps. The UI should prevent under-reaction in serious cases and unnecessary panic in low-risk ones. This ticket defines the MVP triage patterns and escalation visuals.
+
+*Design requirements / cases to consider*
+• Clear differentiation between urgent and non-urgent states
+• Red-flag visual treatment and interruption of normal flow
+• Immediate actions vs informational guidance
+• Accessibility and comprehension under stress
+• Consistency across similar triage scenarios
+• Safe failure modes if confidence is low
+
+As we are moving forward with Doctronics, we are defining what the included capabilities are. Requirements to be defined.",,U0A96QM0XQD,v1.0,,
+"Medication Guidance UX",Medium,U08TNKBEB7W,,U0AF7NL95PY,Done,true,,"*Initial description:* Provides safe, clear guidance on prescription and over-the-counter medications and supplements, including usage, side effects, interactions, coverage context, and neutral comparisons where appropriate. People often ask whether a medication is safe to take, what to watch for, or how it fits into their overall care.
+
+*User & moment*
+_Who is this for? What situation are they in when they ask this?_
+• Has a prescription or OTC medication question
+• Wants to understand side effects, interactions, or contraindications
+• Trying to understand coverage (e.g., ODB) or get a rough sense of cost
+• Wants reassurance or clarification about a medication they’re taking or were prescribed
+• Experiencing a symptom and wondering if it could be medication-related
+*User goal (in their words)*
+_“I want to know ___ so I can ___.”_
+• “I want to know how to take this safely so I can avoid side effects.”
+• “I want to know if this medication could be causing my symptoms so I know what to do next.”
+• “I want to know if this is covered so I can plan my purchase.”
+• “I want to know what risks to watch for so I’m not caught off guard.”
+*System job*
+_What must the system help them decide or do?_
+• Clarify which medication(s) the question applies to
+• Explain safe use, common side effects, and meaningful risks in plain language
+• Incorporate relevant context when available (other meds, known conditions, age)
+• Help the user decide whether to monitor, adjust behaviour, or seek professional help
+• Set clear boundaries around what requires a pharmacist or clinician
+*Happy path (MVP)*
+_Step-by-step, plain language. No UI details. No components._
+1. User asks a medication-related question
+2. System clarifies the medication and the nature of the concern
+3. System provides clear, grounded guidance with citations where relevant
+4. Systems informs about coverage under insurance
+5. System explains common vs concerning effects or interactions
+6. System offers a clear next step (monitor, talk to a pharmacist, seek care)
+*Decision point*
+_What choice or action should the user be confident in by the end?_
+• “I understand how to take this safely.”
+• “I know whether this symptom could be related to my medication.”
+• “I know if I should talk to a pharmacist or clinician next.”
+• “I understand whether coverage applies and what that means for me.”
+*Trust requirements*
+_What would make this feel unsafe, confusing, or untrustworthy?_
+• Contradictory or inconsistent answers across similar questions
+• Information that feels incomplete or overly vague
+• Language that is alarmist or, conversely, dismissive of risk
+• Lack of clarity around what the system can and cannot advise
+• Coverage information that is outdated or inaccurate
+*Explicit non-goals (MVP)*
+_What are we not doing yet?_
+• Diagnosing conditions based on symptoms
+• Changing doses or prescribing medications
+• Managing complex polypharmacy
+• Completing medication purchases or refills in chat
+• Replacing pharmacist or clinician judgment
+• Providing precise or personalized cost estimates
+• not altering details or language of response based on medication risk tiering (i.e. be more cautious while responding about riskier meds)
+
+Relevant medication screen from personalization ticket",,"U0A8JDEKLJ2, U0A9P5FFR4H",v1.1,,
+"Personalization + Transparency UX",Medium,U08TNKBEB7W,,U09BS66S47M,Done,true,,"Design personalization and transparency patterns for Remedy
+
+*Description*
+When Remedy uses personal data, abstains from answering, or expresses uncertainty, users need to understand why. This ticket focuses on the UI patterns that explain system behavior and preserve trust.
+
+*Design requirements / cases to consider*
+• Explaining data provenance (how Remedy knows something)
+• Abstention messaging and next steps
+• Communicating uncertainty clearly and calmly
+• Handoffs to human or external support
+• Consistency across intents
+• Avoiding over-technical explanations
+Figma section (exploration)
+Figma section (second iteration)
+
+
+MVP Doctronic:
+
+*Requirements:*
+1. Changes needed for the citation inspector components. 
+    a. If the response sends just a source and no hyperlink -> Then it should just show the source. User will not be able to click into the source
+    b. If the response sends a source + hyperlink then current behavior remains (user can click -> opens up a page -> user can navigate back to the chat)
+    c. Remove the ""grounding"" text -> with doctronic integration we will not be able to get the grounding text. 
+Need these changes to be implemented on the designs.",,U0A8JDEKLJ2,v1.0,M,
+"Contextual Conversation Chips (Start + Continue)",Medium,U08TNKBEB7W,,U0AF7NL95PY,Done,true,,"Design contextual conversation chips to guide user follow-ups
+
+*Description*
+Users often don’t know what to ask next, which can stall conversations or end sessions prematurely. We need contextual chips that help users start a conversation and continue it meaningfully based on the current intent and response.
+This is about increasing confidence and momentum, not constraining what users can ask.
+
+*Design requirements / cases to consider*
+• First message chips vs mid-conversation chips
+• Chips generated from intent vs generic suggestions
+• How chips change after a user selects one
+• Avoiding repetition or irrelevant suggestions
+• ~Clear distinction between suggestions vs actions~
+• Accessibility and tap targets on mobile",,U0A8JDEKLJ2,v1.1,M,
+"Red-Flag Escalation Components",High,U08TNKBEB7W,,U0A7RFFSHK9,Done,true,,"Design red-flag escalation components for critical scenarios
+
+*Description*
+In high-risk scenarios, Remedy must interrupt the normal conversational flow and make next actions unmistakably clear. This ticket focuses specifically on the escalation UI components themselves, separate from triage logic.
+The goal is fast comprehension and safe action under stress.
+
+*Design requirements / cases to consider*
+• Visual hierarchy that clearly signals urgency
+• When escalation interrupts vs augments a response
+• Primary vs secondary actions (call, book, learn more)
+    ◦ https://coda.io/d/Digital-Health_dm2IMuVAYhm/Red-Flag-Escalation-Scenarios-and-Handling_sudn_xat?docIds=m2IMuVAYhm&search=CHAOS#Red-Flag[…]vdYZpN86P
+• Web vs app behaviours. App is higher priority. Should it open on the phone app? Or somewhere else? Show how each app will open the links/phone calls
+• Consistency across different red-flag scenarios
+
+Red Flag Scenarios: https://coda.io/d/Digital-Health_dm2IMuVAYhm/Red-Flag-Escalation-Scenarios_sudn_xat?docIds=m2IMuVAYhm&search=CHAOS#Red-Flag-Escala[…]Id=c-XvdYZpN86P",,U0A8JDEKLJ2,v1.0,M,
+"Manage chronic conditions",,U08TNKBEB7W,,,Backlog,false,,"*User & moment*
+• Lives with a known chronic condition or multiple chronic conditions
+• Recently diagnosed and unsure what to expect
+• Managing their condition day to day and trying to stay stable or improve
+• Experiencing a flare, worsening symptoms, or a change from baseline
+*User goal (in their words)*
+“I want to understand how to manage my condition and know what to do next.”
+I want to know what symptoms to watch for and whether they are improving or not
+I want to understand my condition in plain language.
+
+*System job*
+Help the user *understand, manage, and respond to their condition* by providing clinically grounded guidance on what’s expected, what they can do day to day, and when to seek further care — without replacing their care team.
+
+*Happy path*
+• Clarify the condition and the user’s current context (new diagnosis, stable management, or flare/change)
+• Explain key management principles and what “normal” looks like for this condition
+• Help the user assess whether their current experience is *expected vs concerning*
+• Provide practical, condition-appropriate self-management guidance where safe
+• Recommend clear next steps or follow-up when escalation is needed
+*Decision point*
+“What should I do next to manage my condition right now?”
+What symptoms should I watch out for and monitor?
+Understanding how to monitor my symptoms
+Knowing what improvement or worsening looks like
+
+*Trust requirements*
+• Feels informed by clinical best practice
+• Respects that users may already have experience managing their condition
+• Avoids alarmism while clearly identifying red flags
+• Is transparent about limits and when clinician involvement is important
+*Explicit non-goals (MVP)*
+• Creating personalized or long-term care plans
+• Medication titration, dosing changes, or prescribing decisions
+• Ongoing coaching, tracking, or goal monitoring
+• Replacing clinician follow-up or care team guidance
+",,U0A96QM0XQD,v1.1,,
+"Post-MVP Triage experience",,U08TNKBEB7W,"Hi <@U0A8JDEKLJ2>, I’ve added the initial set of generic input UI components for the conversational triage flow. When you have a moment, could you take a look and let me know if this direction makes sense?
+
+Here is the link",U0A8JDEKLJ2,Done,true,,"Current MVP triage (Doctronic) relies on text-only conversations where users often miss questions buried in paragraph responses, creating accuracy issues in health contexts. We need to design structured UI components that extract questions from AI responses into interactive forms, making triage more efficient and comprehensive.
+
+*Design Requirements / Cases to Consider*
+• Question extraction from AI responses into structured form components
+• Multi-step triage flows with progress indication
+• Component types: sliders (pain rating), multi-select, single-select, body part picker
+• Fallback to text input when structured components insufficient
+• Error handling when users skip required triage steps
+",,,v1.1,,
+"Planning and prevention",,U08TNKBEB7W,,,Backlog,false,,"*Initial description:* Guides screenings, vaccines, and lifestyle measures aligned to Canadian programs, and translates evidence into practical weekly playbooks or habit plans. For example, someone may ask when colorectal screening should begin in Alberta or how to create a 12-week walk–run plan.
+
+*User & moment*
+• Generally healthy adult being proactive
+• Turning 40 / new life stage
+• Family history triggers concern
+• Managing a chronic condition towards a specific health goal
+*User goal in their words*
+• I want to know what matters most for staying healthy without being overwhelmed
+• I want to know which vaccines I’m eligible for and when (and how much they cost, where/how to book)
+• I want to know which screenings I should get and when (and how much they cost, where/how to book)
+• I want to know if there’s anything important I should be doing at my age or life stage
+• I want to know what patterns and behaviours matter most to succeed with my treatment or health goal
+*System job*
+• Identify prevention actions that apply to this person
+• Prioritize what matters now vs later
+• Explain why recommendations apply to this person
+• Translate guidance into clear, manageable next steps
+• Highlight when followup with a clinician or program provider is recommended
+• Provide practical guidance that supports success without requiring ongoing tracking
+*Happy path*
+• Clarify minimal personal context
+• Identify relevant prevention categories
+• Prioritize top actions
+• Explain why these matter
+• Provide clear next steps
+*Decision point*
+• User has a clear short-term view of what to do next
+• User feels confident they’re not missing anything urgent
+*Trust requirements*
+• Guidance feels personalized, not generic
+• Not overwhelming
+• Clear rationale for recommendations
+• Calm, non-alarmist tone
+• Clear boundaries on what this does and doesn’t replace (e.g. clinician advice)
+*Explicit non-goals (MVP)*
+• Not a full care plan
+• Tracking, optimization, accountability
+• No diagnosis
+• No real-time coaching
+• No custom meal plans
+",,U0A93SM3BPE,v1.1,,
+"NUX - Education components",Low,U08TNKBEB7W,,,"Parking Lot (not required for MVP)",false,,"*Goal*
+Design the first-time Remedy experience that sets clear expectations, builds trust, and explains safety boundaries before meaningful interaction begins.
+
+*Context*
+Users will arrive with assumptions shaped by ChatGPT and Google. If we do not explicitly frame Remedy’s role, we risk either overselling or confusing users.
+
+*What needs to be designed*
+ Design the first-time experience that explains:
+• What Remedy can help with
+• What it cannot do
+• When it will escalate to human support
+• How safety is handled: This should feel calm, clear, and confidence-building, not legalistic.
+*Output*
+ End-to-end first-time user flow and draft copy patterns.",,U0A8JDEKLJ2,"Long-term Discovery",L,
+"In-line Navigation information display",,U0A9P5FFR4H,,,Done,true,,"*Description*
+AI-generated responses may include phone numbers, URLs, email addresses, and physical addresses.
+These should remain inline within the conversational text wherever possible, with clear, lightweight CTAs that allow users to take action (call, open link, email, open maps) without breaking conversational flow.
+This is about enabling action while preserving a natural chat experience.
+
+*Design requirements / cases to consider*
+Inline-first vs elevation
+• Entities remain embedded in text by default.
+• Define when (if ever) an entity should be elevated beyond inline treatment.
+Clear action affordances
+• Phone → tap to call
+• URL → handled to be gracefully displayed → tap to open
+• Email → tap to compose
+• Address → map?
+Visual consistency
+• Actionable entities are visually distinct from regular text.
+• Avoid clutter when multiple entities appear in one response.
+Emergency handling
+• Emergency numbers visually differentiated from standard numbers.
+Accessibility
+• Adequate tap targets on mobile.
+",,"U0A8JDEKLJ2, U0A9P5FFR4H",,S,
+"Change the Entry Point Design for PCH app",High,U0A8JDEKLJ2,"MVP Specs:
+https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy?node-id=1647-301358&t=CMUzRZPZYFpQTItC-11
+Post MVP User flow:
+https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy?node-id=2306-204726&t=CMUzRZPZYFpQTItC-11",U09BS66S47M,Done,true,2026-02-17,"*Requrirement:* 
+1. Change the entry point UI (chatbox) to be on the ""Dashboard"" tab of PCH app design
+2. changes will affect: 
+    a. Branding (on the top bar)
+    b. Bottom Nav differences. 
+PCH App design figma
+Context:
+• Decision made to launch remedy on PCH app MVP. 
+• The current entry point designs are based off of the SDM app design",,U0A8JDEKLJ2,v1.0,M,
+"MVP experience for Sources and Verifiability (proprietary articles)",High,U0A8JDEKLJ2,"Component specs: 
+
+https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy?node-id=1941-213221&t=kzTojTvdd7atQcI1-11
+
+Post MVP Flow:
+
+https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy?node-id=1611-48728&t=CMUzRZPZYFpQTItC-11",U09BS66S47M,Done,true,,"*Requirements:*
+1. Changes needed for the citation inspector components. 
+    a. If the response sends just a source and no hyperlink -> Then it should just show the source. User will not be able to click into the source
+    b. If the response sends a source + hyperlink then current behavior remains (user can click -> opens up a page -> user can navigate back to the chat)
+    c. Remove the ""grounding"" text -> with doctronic integration we will not be able to get the grounding text. 
+Need these changes to be implemented on the designs.",,U0A8JDEKLJ2,v1.0,S,
+"Table component",Medium,U08TNKBEB7W,"<@U0A8JDEKLJ2> this component is ready for review!
+
+Link here.",U0AF7NL95PY,Done,true,,"Doctronic can create tables as part of their responses
+
+We need to create a styled component",,U0A8JDEKLJ2,v1.1,S,
+"Chat UI",High,U08TNKBEB7W,,U09BS66S47M,Done,true,,"Flow:
+• User clicks input and views full screen chat
+• User sends/receives messages",,,v1.0,M,
+"Thumbs up/down experience",High,U08TNKBEB7W,"<@U08TNKBEB7W> Specs added",U0A7RFFSHK9,Done,true,,"We need a simple, unobtrusive feedback mechanism that encourages users to rate response quality without disrupting the chat flow.
+This feedback will help improve Remedy’s performance over time and give users a sense that their input matters for system improvement.
+
+*Design Requirements / Cases to Consider*
+• Placement and timing of feedback prompts (per response vs. end of conversation)
+• Visual treatment that doesn’t overwhelm the chat interface
+• Follow-up actions after thumbs up/down selection
+• Handling of feedback submission and confirmation
+• Integration with existing chat UI components
+Figma Link
+Specifications",,U0A8JDEKLJ2,v1.0,S,
+"Navigation refinement",High,U09BS66S47M,"Updated Wednesday Mar 11:
+
+<@U0A9P5FFR4H> /<@U0A8JDEKLJ2> please review this veed
+
+---
+
+<@U0A9P5FFR4H> /<@U0A8JDEKLJ2> rfr: https://www.figma.com/design/cKsRu32uAlYS3tklgxnlyr/-SHARED--Loblaw-Digital---Project-Remedy-MVP?node-id=2807-102861&t=CMUzRZPZYFpQTItC-11",U09BS66S47M,Done,true,,"*Design Scope Changes for MVP*
+• Map component completely removed for MVP
+    ◦ Technical limitations with Google API integration through agent tech flow
+    ◦ Complex user interaction logic with map expansion/minimization
+    ◦ Will return in future iterations with backend infrastructure in place
+• Toggle between list/map view eliminated
+    ◦ Only list view will be available
+    ◦ “8 recommendations” header and toggle removed entirely
+*Simplified Card Design & Layout*
+• Inline view shows 2-3 cards with “View more” or “See all results” CTA
+• Full list view displays 10 locations by default (from 50 backend results)
+• Card information includes:
+    a. Display name with logo (SDM/LCL locations only)
+    b. Address and “open now” indicator
+    c. Location type (clinic, hospital, pharmacy from Google Maps)
+    d. Distance from user (routing-based, not direct)
+• Three CTAs per card:
+    ◦ Directions (links to Google/Apple Maps)
+    ◦ Phone dialer (if number available)
+    ◦ Booking (SDM/LCL) or Website (others) - same URL field, different labels
+• Cards non-expandable, no chevron navigation
+• Consistent design between inline and full list views
+*Filtering Approach (Optional for MVP)*
+• Three potential filters if time permits:
+    a. Distance range (5km, 10km options vs slider)
+    b. Location type (based on Google Maps primary type)
+    c. Opening hours (open now, 24hrs, weekends)",,,v1.0,S,
+"Remedy on Web designs",Low,U09BS66S47M,,,Backlog,false,,"Remedy currently exists as a mobile-only experience within the iOS apps. We need to design and deliver a web version that maintains the core Remedy experience while adapting to desktop/browser contexts and interaction patterns.
+The web experience should feel native to browser environments while preserving the conversational flow, personalization features, and core functionality that users expect from Remedy. This expansion will increase accessibility and reach for users who prefer desktop interactions for health guidance.
+
+*Design Requirements / Cases to Consider*
+• Responsive design across desktop, tablet, and mobile web viewports
+• Web-specific interaction patterns (hover states, keyboard navigation, right-click contexts)
+• Browser compatibility and progressive enhancement
+• URL structure and deep linking capabilities
+• Integration with existing web properties (PC Health web, Shoppers web)
+• Session management and login state across web platforms
+• Accessibility compliance for web standards (WCAG)
+• Performance considerations for web chat interfaces
+• Mobile web vs. native app experience differentiation",,,Backlog,,
+"Remedy on Android designs",,U08TNKBEB7W,,,Backlog,false,,"Remedy currently exists as an iOS-only experience within PC Health and Shoppers Drug Mart apps. We need to design and deliver an Android version that maintains the core Remedy functionality while adapting to Material Design patterns, Android-specific interactions, and Google ecosystem integrations.
+The Android experience should feel native to Android users while preserving the conversational flow, personalization features, and core health guidance capabilities. This expansion will significantly increase user reach across Canada's Android user base.
+
+*Design Requirements / Cases to Consider*
+• Material Design 3 compliance and Android design system integration
+• Android-specific interaction patterns (navigation gestures, hardware back button)
+• Android-specific permissions model (runtime permissions)",,,Backlog,,
+"Remedy in SDM designs",,U08TNKBEB7W,"This will only be needed for the entry point - closing this ticket for now. When we design the long term entry point, we will need to consider the SDM branding.",,Done,true,,"Following the PC Health launch, Remedy needs to be adapted for the Shoppers Drug Mart brand and app ecosystem. This involves translating the core Remedy experience to align with Shoppers Drug Mart's visual identity, brand voice, and user expectations while maintaining feature parity and conversation continuity.
+
+*Design Requirements / Cases to Consider*
+• Shoppers Drug Mart visual brand system integration (colors, typography, iconography)
+• Integration with existing Shoppers Drug Mart app navigation and information architecture
+• Brand-appropriate entry point placement within Shoppers app ecosystem
+• Shoppers-specific personalization opportunities (pharmacy history, loyalty program)
+• Brand-appropriate error states, loading states, and empty states
+",,,v1.0,,
+"File upload",,U08TNKBEB7W,,,Backlog,false,,"Users often need to share visual information with healthcare providers: photos of symptoms, medication bottles, test results, or documents. Remedy currently only supports text-based conversations, limiting users' ability to get comprehensive guidance on visual health concerns.
+
+We need to design a file upload experience that allows users to share images and relevant documents with Remedy while maintaining appropriate privacy, security, and medical guidance boundaries. This will enable more comprehensive health conversations and better support for visual health questions.
+
+*Design Requirements / Cases to Consider*
+• Chat UI: how uploads fit within chat interface
+• Image capture vs. gallery selection vs. document upload flows
+• File preview and confirmation before sending to Remedy
+• Remedy's capability to analyze and respond to visual content appropriately
+• Error handling for unsupported files, upload failures, etc
+• Loading states and processing time communication for file analysis",,,Backlog,,
+"Visual styling for V2",High,U08TNKBEB7W,,,"In progress",false,,"Update all V1.1 and V2.0 component documentation to reflect the new Ontario GA release visual design system. This includes documenting the approved visual redesign that moves away from the current flat design to a more modern aesthetic.
+
+*Acceptance Criteria*
+• All V1.1 components updated with new visual style documentation
+• All V2.0 components updated with new visual style documentation
+• Component specs reflect new design direction:
+    ◦ Gradient backgrounds with glass effects
+    ◦ Larger buttons with increased padding
+    ◦ 3D icons matching existing app aesthetic
+    ◦ Sans serif for UI elements
+    ◦ Serif font (New York) for agent responses
+• File structure and nomenclature documented for team consistency
+• Design tokens/variables updated to reflect new visual system
+• Component variations and states documented with new styling
+*Scope Notes*
+• *In scope:* V1.1 and V2.0 components only
+• *Out of scope:* V1.0 internal release components
+• Focus on documentation updates, not creating new components",,,v1.1,L,
