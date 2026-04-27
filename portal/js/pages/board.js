@@ -38,7 +38,9 @@ const FILTERS = {
 const state = {
   version: 'all',
   priority: 'all',
-  status: 'active',
+  // Default to "all" so the Complete column populates on first load.
+  // The home dashboard kanban hides Complete; the dedicated board page shows it.
+  status: 'all',
   fetchedAt: null,
   tasks: [],
 };
